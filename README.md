@@ -10,6 +10,18 @@ python run.py examples/sample_sow.md --no-summaries   # structure + labels, <1 s
 python run.py examples/sample_sow.md                  # add summaries from all four models
 ```
 
+**Want one file instead of the package?** [`transformer_index.py`](transformer_index.py) is
+the whole thing — all five stages, the verification, and the runner — in a single
+self-contained script with no local imports. Same code, same output. Download that one file
+and run it:
+
+```bash
+python transformer_index.py yourdoc.md --no-summaries
+```
+
+`--no-summaries` deliberately imports neither torch nor transformers, so the structure and
+label check runs on a bare Python install.
+
 Start with `--no-summaries`. It answers the question that matters first on a new document:
 **did the section rules find the structure at all?** If the section count is wrong, no
 amount of summarising will fix it.
