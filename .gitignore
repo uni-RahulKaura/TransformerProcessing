@@ -1,0 +1,12 @@
+index.json
+*.json
+!requirements.json
+__pycache__/
+*.pyc
+.venv/
+venv*/
+# never commit documents or anything derived from them
+*.md.orig
+inputs/
+in6/
+out6/
