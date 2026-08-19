@@ -206,7 +206,6 @@ def split_parts(tok, text, limit):
 # ======================================================================================
 # STAGES 1 AND 2 -- document into sections and subsections
 # ======================================================================================
-
 """Stages 1 and 2 -- turning a document into sections and subsections.
 
 STAGE 1: what counts as a heading. Three rules, and a line only has to match one.
@@ -246,21 +245,50 @@ same number legitimately appears twice with different children. Document order r
 with no special case."""
 
 HEADING_MD = re.compile(r"^(#{1,6})\s+(.*?)\s*#*$")
-NUM = re.compile(r"^(\d+(?:\.\d+)*)\.?\s+(.*)$")
+# Rule 1d: a bold-delimited span at the START of a line, with the body following it on the
+# SAME line -- "**3. Compelled Disclosure.** If the Recipient is required by law ...".
+# This is the single most common way a heading survives conversion to Markdown, and it
+# defeats both of the other rules: 1a needs a `#`, and 1b rejects the line for being a
+# sentence. Rule 1c cannot help either, because its allowlist only matches a title that
+# ends its line -- and a title that ends its line would already have been caught by 1b.
+# Measured on a test set of six document types: without this rule an NDA silently loses a
+# whole clause, its text absorbed into the neighbouring section with no error.
+BOLD_LEAD = re.compile(r"^\*\*(?P<t>[^*\n]{3,90}?)\*\*(?P<rest>.*)$")
+# Rule 1e: a decimal-numbered paragraph -- "1.1 ...", "4.1.2 ..." -- starts a subsection even
+# when no title follows the number and the rest of the line is a full sentence. Contracts
+# number their subsections this way constantly and 1b rejects every one of them as prose.
+# This gap was invisible while the input came from a converter that emitted each numbered
+# clause as its own element; on raw Markdown it means a document has top-level clauses and
+# nothing beneath them, so an agent sent to clause 4.2 has nowhere to land.
+# The title is the bare number when the line carries no title of its own, which is honest:
+# the number IS how the document refers to it.
+DEC_LEAD = re.compile(r"^(?P<n>\d{1,2}(?:\.\d{1,2}){1,3})\.?\s+(?P<rest>\S.*)$")
+# The trailing text is OPTIONAL. Requiring it meant a section titled with a bare number --
+# which is exactly what rule 1e produces for an untitled subsection -- yielded no number at
+# all, so stage 2 could not nest it and every subsection came out top-level.
+NUM = re.compile(r"^(\d+(?:\.\d+)*)\.?(?:\s+(.*))?$")
 # 1c: a numbered title on a line of its own, optionally bold, optionally colon-terminated
 ALLOW_RX = re.compile(
     r"(?m)^\s*(?:\*\*)?(\d{1,2}\.)\s+([A-Z][A-Za-z0-9 &/\-,']{3,70}?)(?:\*\*)?\s*:?\s*$")
 
 
+def strip_emphasis(t):
+    """Markdown emphasis markers are not part of a title. Stripping only the leading run
+    left every bold heading with a trailing `**` in its title."""
+    return t.strip().strip("*_ ").strip("*_ ").strip(" .:\u2014-").strip()
+
+
 def is_clause_heading(line):
     """Rule 1b -- a short titled line that is not a sentence."""
-    t = line.strip().lstrip("*-• ").strip()
+    t = strip_emphasis(line)
     if not (3 <= len(t) <= 80) or len(t.split()) > 10:
         return False
     if t.endswith(".") and not re.match(r"^\d+\.$", t):
         return False          # a full sentence, not a title
     if re.match(r"^\d+[-/]", t):
         return False          # a date or a data row, e.g. "10-Feb-20  9-Mar-20 ..."
+    if re.match(r"^\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)", t, re.I):
+        return False          # a bare date on its own line -- "1 July 2024" is not a heading
     if not (t[0].isupper() or t[0].isdigit()):
         return False
     return t
@@ -274,11 +302,30 @@ def split_sections(text):
     marks = []                                   # (line index, title, confidence)
     for i, ln in enumerate(lines):
         m = HEADING_MD.match(ln)
-        if m and m.group(2).strip():
-            marks.append((i, m.group(2).strip(), "heading"))
+        if m and strip_emphasis(m.group(2)):
+            marks.append((i, strip_emphasis(m.group(2)), "heading"))
             continue
         stripped = ln.strip()
         if not stripped:
+            continue
+        # 1d: a bold-delimited lead-in is a heading even when its body follows on the
+        # same line. Checked before 1b, which would reject the line as a sentence.
+        b = BOLD_LEAD.match(stripped)
+        if b and b.group("rest").strip():
+            t = strip_emphasis(b.group("t"))
+            if t and len(t.split()) <= 12:
+                marks.append((i, t, "bold-lead"))
+                continue
+        # 1e: a decimal-numbered paragraph is a subsection boundary
+        dm = DEC_LEAD.match(stripped)
+        if dm:
+            rest = strip_emphasis(dm.group("rest"))
+            # if a short title follows the number, use it; otherwise the number stands alone
+            head = rest.split(".")[0].strip() if rest else ""
+            title = dm.group("n")
+            if head and len(head.split()) <= 7 and head[0].isupper() and not head.endswith(","):
+                title = "%s %s" % (dm.group("n"), head)
+            marks.append((i, title, "decimal"))
             continue
         # 1c takes precedence over 1b: an allowlisted title may be glued to its paragraph
         hit = next((a for a in allow if stripped.startswith(a) and len(stripped) > len(a)),
@@ -305,11 +352,14 @@ def split_sections(text):
     for k, s in enumerate(out):
         m = NUM.match(s["title"])
         s["number"] = m.group(1) if m else None
+    for k, s in enumerate(out):
         if not s["number"] or "." not in s["number"]:
             continue
-        stem = s["number"].rsplit(".", 1)[0]
+        stem = _canon(s["number"].rsplit(".", 1)[0])
+        if not stem:
+            continue          # "1.0" is a top-level heading written decimally, not a child
         for back in range(k - 1, -1, -1):
-            if out[back]["number"] == stem:
+            if _canon(out[back]["number"]) == stem:
                 s["parent"] = back
                 break
     for k, s in enumerate(out):
@@ -317,6 +367,22 @@ def split_sections(text):
         # a heading with no body of its own: keep it, mark it, do not summarise it
         s["container_only"] = s["words"] < 6 and any(x.get("parent") == k for x in out)
     return out
+
+
+def _canon(num):
+    """Drop trailing .0 groups before comparing clause numbers.
+
+    Engineering and quality documents number their top-level sections `1.0`, `2.0` and their
+    children `1.1`, `1.2`. Compared literally, the stem of `1.1` is `1`, which never equals
+    `1.0`, so every subsection in such a document came out top-level. Canonicalising both
+    sides makes `1.0` and `1` the same section number, which is what the document means.
+    """
+    if not num:
+        return ""
+    parts = num.split(".")
+    while len(parts) > 1 and parts[-1] == "0":
+        parts.pop()
+    return ".".join(parts)
 
 
 def _mk(title, body, parent, conf):
