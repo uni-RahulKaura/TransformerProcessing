@@ -18,6 +18,7 @@
 # care which, and none of them requires the others:
 #
 #   export DQ_SRC=s3://my-bucket/testfiles      an S3 prefix    (aws s3 sync)
+#   export DQ_SRC=s3://my-bucket/docs.tgz       an S3 tarball   (aws s3 cp)
 #   export DQ_SRC=/mnt/share/Test_Files         a mounted path  (plain copy)
 #   export DQ_SRC=https://host/path/docs.tgz    any tarball URL (curl)
 #
@@ -61,7 +62,20 @@ fetch_docs() {
     s3://*)
       echo "docs   <- $src"
       command -v aws >/dev/null || { echo "dq: aws not installed" >&2; exit 1; }
-      aws s3 sync --only-show-errors --exclude '*' --include '*.md' "$src" "$WORK/inputs"
+      case "$src" in
+        # a single archive object, which is what an upload from a laptop usually produces
+        *.tgz|*.tar.gz)
+          aws s3 cp --only-show-errors "$src" /tmp/dq_docs.tgz
+          rm -rf /tmp/dq_docs && mkdir -p /tmp/dq_docs
+          tar xzf /tmp/dq_docs.tgz -C /tmp/dq_docs
+          if [ -d /tmp/dq_docs/inputs ]; then cp -r /tmp/dq_docs/inputs/. "$WORK/inputs/"
+          else cp -r /tmp/dq_docs/. "$WORK/inputs/"; fi
+          ;;
+        # a prefix holding the documents as they are
+        *)
+          aws s3 sync --only-show-errors --exclude '*' --include '*.md' "$src" "$WORK/inputs"
+          ;;
+      esac
       ;;
     http://*|https://*)
       echo "docs   <- $src"
