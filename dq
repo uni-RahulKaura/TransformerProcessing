@@ -1,0 +1,151 @@
+#!/bin/bash
+# dq -- load the pipeline and the test documents onto this machine, then index whichever
+# document you pick.
+#
+# The documents live in a private repo and the code in a public one, so "load" always
+# fetches the current state of both: there is nothing to paste and nothing to keep in sync
+# by hand. Written for a box with curl and python3.12 but no git.
+#
+#   dq load          fetch/refresh the code and all documents
+#   dq list          number every document so you can choose one
+#   dq run 14        outline + summary for document 14
+#   dq run bills     ...or for every document whose path matches "bills"
+#   dq run all       ...or for all of them
+#   dq show 14       print the sections and the summaries for document 14
+#   dq outline 14    outline only -- no model, runs in about a second
+#
+# The private repo needs a read-only token. Put it in ~/.docindex_token once:
+#   echo 'github_pat_...' > ~/.docindex_token && chmod 600 ~/.docindex_token
+set -euo pipefail
+
+WORK="${DQ_WORK:-/tmp/gpuwork}"
+CODE_REPO="uni-RahulKaura/TransformerProcessing"
+DOCS_REPO="uni-RahulKaura/DocIndexTestFiles"
+PY="${DQ_PYTHON:-}"
+LIST="$WORK/.filelist"
+
+pick_python() {
+  [ -n "$PY" ] && return
+  for c in python3.12 python3.11 python3; do
+    if command -v "$c" >/dev/null 2>&1 && "$c" -c 'import sys;raise SystemExit(0 if sys.version_info>=(3,10) else 1)' 2>/dev/null; then
+      PY="$c"; return
+    fi
+  done
+  echo "dq: need python 3.10 or newer" >&2; exit 1
+}
+
+token() {
+  if [ -n "${GH_TOKEN:-}" ]; then printf '%s' "$GH_TOKEN"; return; fi
+  if [ -f "$HOME/.docindex_token" ]; then tr -d ' \n\r' < "$HOME/.docindex_token"; return; fi
+  echo "dq: no token. put a read-only GitHub token in ~/.docindex_token" >&2; exit 1
+}
+
+cmd_load() {
+  pick_python
+  mkdir -p "$WORK"
+  echo "code   <- $CODE_REPO"
+  curl -fsSL -o /tmp/dq_code.tgz \
+    "https://codeload.github.com/$CODE_REPO/tar.gz/refs/heads/main"
+  tar xzf /tmp/dq_code.tgz -C "$WORK" --strip-components=1
+  echo "docs   <- $DOCS_REPO (private)"
+  local t; t="$(token)"
+  local code
+  code=$(curl -sSL -w '%{http_code}' -H "Authorization: Bearer $t" \
+           -o /tmp/dq_docs.tgz "https://api.github.com/repos/$DOCS_REPO/tarball/main")
+  if [ "$code" != "200" ] || [ "$(wc -c </tmp/dq_docs.tgz)" -lt 10000 ]; then
+    echo "dq: fetching documents failed (HTTP $code). Is the token valid and scoped to" >&2
+    echo "    $DOCS_REPO with Contents:Read?" >&2
+    exit 1
+  fi
+  rm -rf /tmp/dq_docs && mkdir -p /tmp/dq_docs
+  tar xzf /tmp/dq_docs.tgz -C /tmp/dq_docs --strip-components=1
+  rm -rf "$WORK/inputs" && cp -r /tmp/dq_docs/inputs "$WORK/inputs"
+  find "$WORK/inputs" -name '*.md' | sort > "$LIST"
+  echo "ready: $(wc -l <"$LIST" | tr -d ' ') documents in $WORK/inputs"
+  "$PY" -c "import torch;print('torch',torch.__version__,'cuda',torch.cuda.is_available())" \
+    2>/dev/null || echo "note: torch not importable -- outlines will work, summaries will not"
+}
+
+need_list() {
+  [ -s "$LIST" ] || { echo "dq: run 'dq load' first" >&2; exit 1; }
+}
+
+cmd_list() {
+  need_list
+  awk -v w="$WORK/inputs/" '{p=$0; sub(w,"",p); printf "%3d  %s\n", NR, p}' "$LIST"
+}
+
+# echo the selected files, one per line
+select_files() {
+  need_list
+  local sel="$1"
+  if [ "$sel" = "all" ]; then cat "$LIST"; return; fi
+  if printf '%s' "$sel" | grep -Eq '^[0-9]+$'; then
+    sed -n "${sel}p" "$LIST"; return
+  fi
+  grep -i -- "$sel" "$LIST" || true
+}
+
+# stage only the chosen files, so a run costs only what you asked for
+stage() {
+  local files="$1" dir="$WORK/.sel"
+  rm -rf "$dir"; mkdir -p "$dir"
+  local n=0
+  while IFS= read -r f; do
+    [ -z "$f" ] && continue
+    local rel="${f#"$WORK"/inputs/}"
+    mkdir -p "$dir/inputs/$(dirname "$rel")"
+    cp "$f" "$dir/inputs/$rel"
+    n=$((n+1))
+  done <<< "$files"
+  [ "$n" -eq 0 ] && { echo "dq: nothing matched" >&2; exit 1; }
+  for x in pipeline compare_run.py outline.py outline_only.py run_all.py render_split.py \
+           group_outlines.py; do
+    [ -e "$WORK/$x" ] && cp -r "$WORK/$x" "$dir/"
+  done
+  echo "$n"
+}
+
+cmd_run() {
+  pick_python
+  local files n
+  files="$(select_files "${1:-all}")"
+  n="$(stage "$files")"
+  echo "indexing $n document(s) -- outlines then summaries"
+  ( cd "$WORK/.sel" && DEVICE="${DEVICE:-cuda}" OUT=out "$PY" run_all.py )
+  ( cd "$WORK/.sel" && "$PY" render_split.py out >/dev/null )
+  echo
+  echo "sections  -> $WORK/.sel/out/SECTIONS/"
+  echo "summaries -> $WORK/.sel/out/SUMMARIES/"
+}
+
+cmd_outline() {
+  pick_python
+  local files n
+  files="$(select_files "${1:-all}")"
+  n="$(stage "$files")"
+  ( cd "$WORK/.sel" && OUT=out "$PY" outline_only.py )
+  ( cd "$WORK/.sel" && "$PY" render_split.py out >/dev/null 2>&1 || true )
+  echo
+  for f in "$WORK/.sel"/out/docs/*.outline.txt; do [ -e "$f" ] && cat "$f"; done
+}
+
+cmd_show() {
+  local files; files="$(select_files "${1:-1}")"
+  local rel base
+  rel="$(head -1 <<< "$files")"; base="$(basename "$rel")"
+  echo "==================== SECTIONS ===================="
+  grep -rl -- "$base" "$WORK/.sel/out/SECTIONS/" 2>/dev/null | head -1 | xargs -r cat
+  echo
+  echo "==================== SUMMARIES ==================="
+  grep -rl -- "$base" "$WORK/.sel/out/SUMMARIES/" 2>/dev/null | head -1 | xargs -r cat
+}
+
+case "${1:-}" in
+  load)    cmd_load ;;
+  list)    cmd_list ;;
+  run)     shift; cmd_run "${1:-all}" ;;
+  outline) shift; cmd_outline "${1:-all}" ;;
+  show)    shift; cmd_show "${1:-1}" ;;
+  *) awk 'NR>1 && /^#/ {sub(/^# ?/,""); print; next} NR>1 {exit}' "$0" ;;
+esac
