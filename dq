@@ -20,10 +20,10 @@
 #   export DQ_SRC=s3://my-bucket/testfiles      an S3 prefix    (aws s3 sync)
 #   export DQ_SRC=/mnt/share/Test_Files         a mounted path  (plain copy)
 #   export DQ_SRC=https://host/path/docs.tgz    any tarball URL (curl)
-#   export DQ_SRC=repo                          the private GitHub repo (default)
 #
-# Only the "repo" source needs a token; put it in ~/.docindex_token once:
-#   echo 'github_pat_...' > ~/.docindex_token && chmod 600 ~/.docindex_token
+# There is no default and no built-in document location: the documents are customer
+# agreements and do not belong in this repository or in any other hosted one. DQ_SRC must
+# name somewhere you control.
 #
 # The code itself is a 56 KB public tarball and needs no credential. Set DQ_CODE to a
 # local path or another URL to take it from somewhere else.
@@ -31,7 +31,6 @@ set -euo pipefail
 
 WORK="${DQ_WORK:-/tmp/gpuwork}"
 CODE_REPO="uni-RahulKaura/TransformerProcessing"
-DOCS_REPO="uni-RahulKaura/DocIndexTestFiles"
 PY="${DQ_PYTHON:-}"
 LIST="$WORK/.filelist"
 
@@ -45,16 +44,18 @@ pick_python() {
   echo "dq: need python 3.10 or newer" >&2; exit 1
 }
 
-token() {
-  if [ -n "${GH_TOKEN:-}" ]; then printf '%s' "$GH_TOKEN"; return; fi
-  if [ -f "$HOME/.docindex_token" ]; then tr -d ' \n\r' < "$HOME/.docindex_token"; return; fi
-  echo "dq: no token. put a read-only GitHub token in ~/.docindex_token" >&2; exit 1
-}
 
 # Bring the documents in from whichever source is configured. Each branch leaves them in
 # $WORK/inputs and nothing downstream knows which was used.
 fetch_docs() {
-  local src="${DQ_SRC:-repo}"
+  local src="${DQ_SRC:-}"
+  if [ -z "$src" ]; then
+    echo "dq: set DQ_SRC to where your documents are. Any of:" >&2
+    echo "      export DQ_SRC=s3://your-bucket/testfiles" >&2
+    echo "      export DQ_SRC=/mnt/share/Test_Files" >&2
+    echo "      export DQ_SRC=https://your-host/docs.tgz" >&2
+    exit 1
+  fi
   rm -rf "$WORK/inputs"; mkdir -p "$WORK/inputs"
   case "$src" in
     s3://*)
@@ -70,20 +71,6 @@ fetch_docs() {
       # accept either a bare tree of documents or one wrapped in inputs/
       if [ -d /tmp/dq_docs/inputs ]; then cp -r /tmp/dq_docs/inputs/. "$WORK/inputs/"
       else cp -r /tmp/dq_docs/. "$WORK/inputs/"; fi
-      ;;
-    repo)
-      echo "docs   <- $DOCS_REPO (private)"
-      local t code; t="$(token)"
-      code=$(curl -sSL -w '%{http_code}' -H "Authorization: Bearer $t" \
-               -o /tmp/dq_docs.tgz "https://api.github.com/repos/$DOCS_REPO/tarball/main")
-      if [ "$code" != "200" ] || [ "$(wc -c </tmp/dq_docs.tgz)" -lt 10000 ]; then
-        echo "dq: fetching documents failed (HTTP $code). Is the token valid and scoped" >&2
-        echo "    to $DOCS_REPO with Contents:Read?" >&2
-        exit 1
-      fi
-      rm -rf /tmp/dq_docs && mkdir -p /tmp/dq_docs
-      tar xzf /tmp/dq_docs.tgz -C /tmp/dq_docs --strip-components=1
-      cp -r /tmp/dq_docs/inputs/. "$WORK/inputs/"
       ;;
     *)
       [ -d "$src" ] || { echo "dq: no such directory: $src" >&2; exit 1; }
