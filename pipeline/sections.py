@@ -108,7 +108,12 @@ NOT_A_TITLE = [
     re.compile(r"^\d{6,}$"),                                    # 4765287825
     re.compile(r"^[A-Z][A-Za-z /'&.-]{1,34}:\s*\S"),            # Account: 689256923-12345
     re.compile(r"^[A-Z\s]+,\s*[A-Z]{2}\s+\d{5}(-\d{4})?$"),    # PIERZ, MN 56364-1530
-    re.compile(r"^\d+\s+[A-Z][A-Z\s]+(AVE|ST|RD|BLVD|DR|LN|WAY|CT|PKWY)\b", re.I),
+    # A street address. "25 Madison Avenue" -- the notices clause -- reads exactly like clause
+    # 25, so the previous all-caps-only form missed it. Full words as well as abbreviations,
+    # and title case as well as caps.
+    re.compile(r"^\d+\.?\s+[A-Z][A-Za-z.'-]*(?:\s+[A-Z][A-Za-z.'-]*)*\s+"
+               r"(?:AVE|AVENUE|ST|STREET|RD|ROAD|BLVD|BOULEVARD|DR|DRIVE|LN|LANE|WAY|CT|COURT"
+               r"|PKWY|PARKWAY|PLAZA|PL|SQUARE|SQ|TERRACE|TER)\.?$", re.I),
     re.compile(r"^(?:page|empty row|keyline)\b", re.I),
 ]
 
@@ -294,6 +299,10 @@ def clause_inline_title(t):
     title = im.group("title").strip().rstrip("*").strip()
     w = title.split()
     if not w or len(w) > 10 or not title[0].isalpha():
+        return None
+    # "1. Name: Customer, as defined in the Agreement" is a field in a list of parties, not a
+    # clause called "Name". The execution-block key list already names these labels.
+    if title.lower().rstrip(":") in SIG_KEY:
         return None
     caps = sum(1 for x in w if x[:1].isupper())
     # a title is capitalised throughout; a sentence's first clause is not. A colon is a much
