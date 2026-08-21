@@ -32,12 +32,19 @@ document, while BART read the same section in five parts and every part summary 
 accurate. And quoting is safe but useless: the extractive model never invents, because
 every word is quoted, but "most typical sentence" in a formal document is the boilerplate.
 """
+import os
 import torch
 from transformers import AutoModel, AutoModelForSeq2SeqLM, AutoTokenizer
 
 from .chunking import SENT, split_parts
 
-torch.set_num_threads(1)
+# Run on the GPU when there is one. A T4 is sm_75, which does fp16 but not bf16, so fp16 is
+# the only half precision available -- and it is the point of going to the GPU at all: BART's
+# 400M parameters at fp32 on one CPU thread is what made the full 33-file run take hours.
+DEVICE = os.environ.get("DEVICE") or ("cuda" if torch.cuda.is_available() else "cpu")
+DTYPE = torch.float16 if DEVICE == "cuda" else torch.float32
+if DEVICE == "cpu":
+    torch.set_num_threads(1)
 
 MODELS = [("BART-large-CNN", "facebook/bart-large-cnn", 1024, "abstractive"),
           ("DistilBART-CNN", "sshleifer/distilbart-cnn-12-6", 1024, "abstractive"),
@@ -50,8 +57,8 @@ MODELS = [("BART-large-CNN", "facebook/bart-large-cnn", 1024, "abstractive"),
 def load(repo, kind):
     tok = AutoTokenizer.from_pretrained(repo)
     if kind != "abstractive":
-        return tok, AutoModel.from_pretrained(repo).eval()
-    mdl = AutoModelForSeq2SeqLM.from_pretrained(repo, dtype=torch.float32).eval()
+        return tok, AutoModel.from_pretrained(repo).to(DEVICE).eval()
+    mdl = AutoModelForSeq2SeqLM.from_pretrained(repo, dtype=DTYPE).to(DEVICE).eval()
     if "long-t5" in repo:
         # This checkpoint stores one embedding table under `shared.weight` but declares
         # tie_word_embeddings=False. transformers therefore randomly initialises the
@@ -68,7 +75,7 @@ def load(repo, kind):
 
 
 def summarise(tok, mdl, repo, limit, text, longer=False):
-    enc = tok(text, return_tensors="pt", truncation=True, max_length=limit)
+    enc = tok(text, return_tensors="pt", truncation=True, max_length=limit).to(DEVICE)
     g = mdl.generate(**enc, max_new_tokens=80 if longer else 70, min_new_tokens=12,
                      num_beams=4 if "long-t5" not in repo else 2,
                      do_sample=False, no_repeat_ngram_size=3)
@@ -83,7 +90,7 @@ def extract(tok, mdl, text):
     vs = []
     with torch.inference_mode():
         for x in sents:
-            e = tok(x, return_tensors="pt", truncation=True, max_length=512)
+            e = tok(x, return_tensors="pt", truncation=True, max_length=512).to(DEVICE)
             h = mdl(**e).last_hidden_state
             m = e["attention_mask"].unsqueeze(-1).float()
             v = (h * m).sum(1) / m.sum(1).clamp(min=1e-9)

@@ -10,3 +10,8 @@ venv*/
 inputs/
 in6/
 out6/
+out*/
+OUTLINES/
+ground_truth.json
+*.b64
+*.tgz
