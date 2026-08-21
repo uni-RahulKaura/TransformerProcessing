@@ -52,6 +52,15 @@ def _real_fields(md):
 RESTART = re.compile(r"(?m)^\s*(?:\*\*)?1\.\s+[A-Z\"(]")
 
 
+# A letter: a salutation and a complimentary close. Both, because either alone appears in other
+# document types -- a contract recital can open "Dear" in a quoted exhibit, and "Sincerely"
+# turns up inside attached correspondence.
+SALUTATION = re.compile(r"(?m)^\s*(?:\*\*)?Dear\s+[A-Z]", re.M)
+CLOSING = re.compile(r"(?m)^\s*(?:\*\*)?(?:Very truly yours|Sincerely(?: yours)?|"
+                     r"Best regards|Kind regards|Yours (?:truly|faithfully|sincerely)|"
+                     r"Respectfully(?: yours)?|Regards)\s*,?\s*(?:\*\*)?$", re.I | re.M)
+
+
 def survey(md):
     """Count the structure signals present, and name the regime they imply."""
     s = {
@@ -63,6 +72,8 @@ def survey(md):
         "fields": len(_real_fields(md)),
         "labels": len(LABEL_ONLY.findall(md)),
         "restarts": len(RESTART.findall(md)),
+        "salutation": len(SALUTATION.findall(md)),
+        "closing": len(CLOSING.findall(md)),
     }
     # Density matters, not just count: 8 headings in a 90 KB report is a real backbone, while
     # 8 headings in an 850 KB lease is not.
@@ -97,6 +108,11 @@ def survey(md):
     # or a letter. Those labels are the only structure the author gave, so use them.
     elif s["labels"] >= 3:
         s["regime"] = "labels"
+    # A letter is prose addressed to someone. It has no sections, and inferring them from line
+    # shape turned a two-paragraph waiver letter into fifteen "sections": the law firm's name,
+    # each city in its letterhead, the date, the salutation, the closing and each signatory.
+    elif s["salutation"] and s["closing"]:
+        s["regime"] = "letter"
     else:
         s["regime"] = "flat"
 
@@ -118,5 +134,7 @@ RULES = {
     "fields":   {"md": True, "bold": False, "clause": False, "decimal": False, "infer": False, "label": False, "blocklead": False},
     "labels":   {"md": True, "bold": True, "clause": False, "decimal": False, "infer": False,
                  "label": True, "blocklead": False},
+    "letter":   {"md": True, "bold": False, "clause": False, "decimal": False, "infer": False,
+                 "label": False, "blocklead": False},
     "flat":     {"md": True, "bold": True, "clause": True, "decimal": True, "infer": True, "label": True, "blocklead": False},
 }

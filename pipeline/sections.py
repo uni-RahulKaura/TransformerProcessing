@@ -555,6 +555,12 @@ def split_sections(text, regime=None):
                 break
     out = merge_numbered_lists(out)
     out = collapse_label_runs(out)
+    # A document with no headings at all still has one section: itself. Returning an empty list
+    # loses the document entirely -- a two-paragraph letter came back with nothing to show --
+    # and the reader is owed the fact that it carries no headings, written as "no header".
+    if not out:
+        body = "\n".join(x for x in lines if x.strip() and x.strip() != BLK)
+        out = [_mk("no header", body, None, "whole-document")]
     for k, s in enumerate(out):
         s["order"] = k
         # a heading with no body of its own: keep it, mark it, do not summarise it
