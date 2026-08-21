@@ -14,8 +14,19 @@
 #   dq show 14       print the sections and the summaries for document 14
 #   dq outline 14    outline only -- no model, runs in about a second
 #
-# The private repo needs a read-only token. Put it in ~/.docindex_token once:
+# WHERE THE DOCUMENTS COME FROM. Set DQ_SRC to whichever you have; the script does not
+# care which, and none of them requires the others:
+#
+#   export DQ_SRC=s3://my-bucket/testfiles      an S3 prefix    (aws s3 sync)
+#   export DQ_SRC=/mnt/share/Test_Files         a mounted path  (plain copy)
+#   export DQ_SRC=https://host/path/docs.tgz    any tarball URL (curl)
+#   export DQ_SRC=repo                          the private GitHub repo (default)
+#
+# Only the "repo" source needs a token; put it in ~/.docindex_token once:
 #   echo 'github_pat_...' > ~/.docindex_token && chmod 600 ~/.docindex_token
+#
+# The code itself is a 56 KB public tarball and needs no credential. Set DQ_CODE to a
+# local path or another URL to take it from somewhere else.
 set -euo pipefail
 
 WORK="${DQ_WORK:-/tmp/gpuwork}"
@@ -40,26 +51,63 @@ token() {
   echo "dq: no token. put a read-only GitHub token in ~/.docindex_token" >&2; exit 1
 }
 
+# Bring the documents in from whichever source is configured. Each branch leaves them in
+# $WORK/inputs and nothing downstream knows which was used.
+fetch_docs() {
+  local src="${DQ_SRC:-repo}"
+  rm -rf "$WORK/inputs"; mkdir -p "$WORK/inputs"
+  case "$src" in
+    s3://*)
+      echo "docs   <- $src"
+      command -v aws >/dev/null || { echo "dq: aws not installed" >&2; exit 1; }
+      aws s3 sync --only-show-errors --exclude '*' --include '*.md' "$src" "$WORK/inputs"
+      ;;
+    http://*|https://*)
+      echo "docs   <- $src"
+      curl -fsSL -o /tmp/dq_docs.tgz "$src"
+      rm -rf /tmp/dq_docs && mkdir -p /tmp/dq_docs
+      tar xzf /tmp/dq_docs.tgz -C /tmp/dq_docs
+      # accept either a bare tree of documents or one wrapped in inputs/
+      if [ -d /tmp/dq_docs/inputs ]; then cp -r /tmp/dq_docs/inputs/. "$WORK/inputs/"
+      else cp -r /tmp/dq_docs/. "$WORK/inputs/"; fi
+      ;;
+    repo)
+      echo "docs   <- $DOCS_REPO (private)"
+      local t code; t="$(token)"
+      code=$(curl -sSL -w '%{http_code}' -H "Authorization: Bearer $t" \
+               -o /tmp/dq_docs.tgz "https://api.github.com/repos/$DOCS_REPO/tarball/main")
+      if [ "$code" != "200" ] || [ "$(wc -c </tmp/dq_docs.tgz)" -lt 10000 ]; then
+        echo "dq: fetching documents failed (HTTP $code). Is the token valid and scoped" >&2
+        echo "    to $DOCS_REPO with Contents:Read?" >&2
+        exit 1
+      fi
+      rm -rf /tmp/dq_docs && mkdir -p /tmp/dq_docs
+      tar xzf /tmp/dq_docs.tgz -C /tmp/dq_docs --strip-components=1
+      cp -r /tmp/dq_docs/inputs/. "$WORK/inputs/"
+      ;;
+    *)
+      [ -d "$src" ] || { echo "dq: no such directory: $src" >&2; exit 1; }
+      echo "docs   <- $src"
+      ( cd "$src" && find . -name '*.md' -exec sh -c \
+          'mkdir -p "$0/$(dirname "$1")" && cp "$1" "$0/$1"' "$WORK/inputs" {} \; )
+      ;;
+  esac
+}
+
 cmd_load() {
   pick_python
   mkdir -p "$WORK"
-  echo "code   <- $CODE_REPO"
-  curl -fsSL -o /tmp/dq_code.tgz \
-    "https://codeload.github.com/$CODE_REPO/tar.gz/refs/heads/main"
-  tar xzf /tmp/dq_code.tgz -C "$WORK" --strip-components=1
-  echo "docs   <- $DOCS_REPO (private)"
-  local t; t="$(token)"
-  local code
-  code=$(curl -sSL -w '%{http_code}' -H "Authorization: Bearer $t" \
-           -o /tmp/dq_docs.tgz "https://api.github.com/repos/$DOCS_REPO/tarball/main")
-  if [ "$code" != "200" ] || [ "$(wc -c </tmp/dq_docs.tgz)" -lt 10000 ]; then
-    echo "dq: fetching documents failed (HTTP $code). Is the token valid and scoped to" >&2
-    echo "    $DOCS_REPO with Contents:Read?" >&2
-    exit 1
+  local codesrc="${DQ_CODE:-https://codeload.github.com/$CODE_REPO/tar.gz/refs/heads/main}"
+  echo "code   <- $codesrc"
+  if [ -d "$codesrc" ]; then
+    cp -r "$codesrc"/. "$WORK"/
+  elif [ -f "$codesrc" ]; then
+    tar xzf "$codesrc" -C "$WORK" --strip-components=1
+  else
+    curl -fsSL -o /tmp/dq_code.tgz "$codesrc"
+    tar xzf /tmp/dq_code.tgz -C "$WORK" --strip-components=1
   fi
-  rm -rf /tmp/dq_docs && mkdir -p /tmp/dq_docs
-  tar xzf /tmp/dq_docs.tgz -C /tmp/dq_docs --strip-components=1
-  rm -rf "$WORK/inputs" && cp -r /tmp/dq_docs/inputs "$WORK/inputs"
+  fetch_docs
   find "$WORK/inputs" -name '*.md' | sort > "$LIST"
   echo "ready: $(wc -l <"$LIST" | tr -d ' ') documents in $WORK/inputs"
   "$PY" -c "import torch;print('torch',torch.__version__,'cuda',torch.cuda.is_available())" \
