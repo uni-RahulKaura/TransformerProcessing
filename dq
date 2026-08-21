@@ -50,6 +50,8 @@ pick_python() {
 # $WORK/inputs and nothing downstream knows which was used.
 fetch_docs() {
   local src="${DQ_SRC:-}"
+  # go(1) records the source in ~/.dq_src so later sessions need no environment variable
+  if [ -z "$src" ] && [ -f "$HOME/.dq_src" ]; then src="$(tr -d ' \n\r' < "$HOME/.dq_src")"; fi
   if [ -z "$src" ]; then
     echo "dq: set DQ_SRC to where your documents are. Any of:" >&2
     echo "      export DQ_SRC=s3://your-bucket/testfiles" >&2
