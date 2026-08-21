@@ -32,7 +32,7 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     os.makedirs(os.path.join(OUT, "docs"), exist_ok=True)
     print("device: %s   files: %d" % (DEVICE, len(files)), flush=True)
-    tok, mdl = load(REPO, "abstractive")
+    tok, mdl = load(REPO)
 
     manifest = []
     t_all = time.time()

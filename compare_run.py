@@ -160,7 +160,7 @@ def main():
     cap = int(os.environ.get("CAP", "0")) or None
     raw = open(src, encoding="utf-8", errors="replace").read()
     os.makedirs(outdir, exist_ok=True)
-    tok, mdl = load(REPO, "abstractive")
+    tok, mdl = load(REPO)
 
     from docling.document_converter import DocumentConverter
     t0 = time.time()
