@@ -34,14 +34,32 @@ from pipeline.sections import split_sections
 from pipeline.survey import survey           # noqa: E402
 from pipeline.tables import summarise_table            # noqa: E402
 from pipeline.verify import check                      # noqa: E402
-from pipeline.chunking import split_parts              # noqa: E402
-from pipeline.summarise import load, summarise         # noqa: E402
+from pipeline.chunking import split_parts, split_for_coverage   # noqa: E402
+# The summariser is imported LAZILY, inside index(), because it pulls in torch and
+# transformers. The outline stage uses none of that -- it is the section rules and nothing else --
+# but importing it here gave outline_only.py a hard dependency on a 2 GB deep-learning stack, so
+# "outlines need no model" was true of the algorithm and false of the code. It could not run, and
+# therefore could not be VERIFIED, on any machine without torch installed.
 
 REPO, LIMIT = "facebook/bart-large-cnn", 1024
 CATS = ["PAY", "EXPIRY", "PARTY", "PERM", "OBLIG"]
 HTML_TABLE = re.compile(r"<table\b.*?</table>", re.S | re.I)
 PIPE_TABLE = re.compile(r"(?m)(?:^\s*\|.*\|\s*$\n?){2,}")
-VISION = re.compile(r"<::(.*?)::>", re.S)
+# A vision description lives inside ONE layout block, so the pattern must not be allowed to cross
+# a block boundary. Left unbounded it will, and the consequence is silent content loss rather than
+# a parse error: the Tesla Q3-2023 deck contains a degenerate empty marker "<::>", which opens a
+# description that has no closer of its own, so the search ran on to the NEXT figure's "::>" and
+# swallowed 2,213 characters of the document in between -- including three real Markdown headings
+# ("# Artificial Intelligence Software and Hardware", "## Vehicle and Other Software",
+# "## Battery, Powertrain & Manufacturing"), each of which appears exactly once in the file and
+# all three of which an independent reader's key contains. Nothing flagged it: the file's "<::" and
+# "::>" counts balance at 17 each, so a marker-balance check sees a healthy document.
+#
+# Bounding on the block sentinel fixes the class, not just this instance -- any malformed marker
+# now costs at most its own block instead of everything up to the next well-formed one.
+VISION = re.compile(r"<::((?:(?!::>)(?!\x00BLK\x00).)*?)::>", re.S)
+# ...and an empty marker is furniture: it describes nothing, so there is nothing to keep.
+EMPTY_VISION = re.compile(r"<::\s*::>|<::>")
 ANCHOR = re.compile(r"<a id='[^']*'></a>\s*")
 FURNITURE = [re.compile(r"(?m)^\s*DocuSign Envelope ID:.*$"),
              re.compile(r"(?m)^\s*<!--\s*PAGE BREAK\s*-->\s*$"),
@@ -68,6 +86,7 @@ def sectionise(md):
     md = ANCHOR.sub("\n\x00BLK\x00\n", md)
     for rx in FURNITURE:
         md = rx.sub("", md)
+    md = EMPTY_VISION.sub("", md)
     store = {}
 
     def hide(m):
@@ -94,14 +113,33 @@ def sectionise(md):
         prose = PIPE_TABLE.sub(" ", prose)
         prose = re.sub(r"<[^>]+>", " ", prose)
         prose = re.sub(r"\(block\)|MASK\d{5}", " ", prose)
+        # split_sections marks a masked block with its own sentinel, "\x00BLK\x00". Whatever
+        # survives of it must go too: one summary otherwise read "... New York, NY BLK  Re:".
+        prose = prose.replace("\x00BLK\x00", " ").replace("\x00", " ")
+        prose = re.sub(r"(?<![A-Za-z])BLK(?![A-Za-z])", " ", prose)
         s["text"] = re.sub(r"\s+", " ", prose).strip()
+        # The clause number is structure, and the section's title already carries it. Left at
+        # the head of the prose it reaches BART and comes back inside the summary, so a section
+        # titled "1." rendered as "1." followed by "1. For any position filled...". Dropped
+        # once, here, and only when the title is that same bare number -- a numbered heading
+        # with a real title ("2.7 Modifications") never had the problem.
+        _t = (s.get("title") or "").strip()
+        _n = re.match(r"^(\d{1,2}(?:\.\d{1,3})*)\.?$", _t)
+        if _n:
+            s["text"] = re.sub(r"^\(?%s\)?[.):]?\s+" % re.escape(_n.group(1)), "", s["text"])
         s["words"] = len(s["text"].split())
         s["full"] = full
+    # Figure and table counts only exist once the masked blocks have been handed back, above --
+    # so the caption test that depends on them has to run here rather than inside
+    # split_sections(), which never sees them.
+    from pipeline.sections import drop_figure_captions
+    out = drop_figure_captions(out)
     return out
 
 
 def index(md, tok, mdl, cap=None):
     """Section, then summarise: prose by model, tables by arithmetic, figures by quotation."""
+    from pipeline.summarise import summarise            # noqa: E402  (see note at the imports)
     S = sectionise(md)
     rows = []
     for i, s in enumerate(S):
@@ -112,17 +150,102 @@ def index(md, tok, mdl, cap=None):
         r["figure_summaries"] = [interpret(f)[1] for f in s["figures"]]
         r["figure_kinds"] = [interpret(f)[0] for f in s["figures"]]
         over = cap is not None and i >= cap
+        # A very SHORT section is quoted, not reworded, because a rewrite of it buys no brevity.
+        #
+        # The threshold is a trade, and the corpus prices it exactly. Sections at or below N words,
+        # as a share of the 2,485 with summaries, and the abstractive rate that remains:
+        #
+        #     N=20   5.8%  ->  84.1%        N=50   26.7%  ->  63.3%
+        #     N=25   9.6%  ->  80.3%        N=60   33.0%  ->  56.9%
+        #     N=30  13.1%  ->  76.9%        N=100  54.7%  ->  35.2%
+        #
+        # 25 is chosen, not tuned: it catches only sections a summary cannot usefully shorten while
+        # leaving the abstractive rate above 80%, which is the requirement this work exists to meet.
+        # 60 was tried first and cost 33 points of that rate for no measured gain in faithfulness.
+        # SHORT_WORDS=0 turns the rule off entirely; raise it if quoting is preferred to rewording.
+        short = int(os.environ.get("SHORT_WORDS", "25"))
+        if (s["text"] and short and 12 < s["words"] <= short
+                and not s["container_only"] and not over):
+            from pipeline.safe_abstractive import verbatim as _vb
+            r["summary"] = _vb(s["text"], n=3)
+            r["summary_extractive"] = r["summary"]
+            r["parts"], r["findings"] = [], []
+            r["abstractive"] = {"chosen": "extractive-short",
+                                "reason": "section is %d words; quoting it is more faithful than "
+                                          "rewording it and no longer" % s["words"]}
+            p = rules_predict(s["full"]) if s["full"].strip() else {}
+            r["cats"] = [c for c in CATS if p.get(c)]
+            rows.append(r)
+            continue
         if s["text"] and s["words"] > 12 and not s["container_only"] and not over:
-            parts = split_parts(tok, s["text"], LIMIT)
+            # COVER=0 restores the old behaviour (one pass for anything that fits the window).
+            parts = (split_for_coverage(tok, s["text"], LIMIT)
+                     if os.environ.get("COVER", "1") != "0"
+                     else split_parts(tok, s["text"], LIMIT))
             if len(parts) == 1:
-                r["summary"], r["parts"] = summarise(tok, mdl, REPO, LIMIT, s["text"]), []
+                r["summary"], r["parts"] = summarise(tok, mdl, REPO, LIMIT, s["text"],
+                                                    section_words=s["words"]), []
+                # BOTH summaries, same model, same section: the extractive-leaning default and the
+                # forced-abstractive variant. Emitted side by side deliberately rather than one
+                # being chosen here, because the choice is a real trade and the evidence is split:
+                # blind judges put invention at 2 of 35 for the default and 8 of 35 for the
+                # abstractive one, while the abstractive one was the ONLY candidate of four to state
+                # a contract's three-year term where the default reproduced a page footer. A reader
+                # comparing them on their own documents can settle it; a default buried in code
+                # cannot.
+                # ABSTRACTIVE BY DEFAULT, with figures guarded. Generate a second draft with the
+                # source's prose blocked, then keep it unless it introduced a figure, date or name
+                # the section does not contain -- an invented figure is deleted and the rewrite
+                # kept; an invented name forces the faithful version, because a name cannot be
+                # removed without changing who the sentence is about.
+                # Measured on 24 sections of four document types: 88% published as a rewrite,
+                # copy rate 0.257 against the 0.696 all-extractive baseline.
+                if os.environ.get("ABSTRACTIVE", "1") != "0":
+                    import pipeline.summarise as _sm
+                    from pipeline.safe_abstractive import choose as _choose
+                    _keep = _sm.ENC_NO_REPEAT
+                    try:
+                        _sm.ENC_NO_REPEAT = int(os.environ.get("ABS_N", "6"))
+                        _draft = summarise(tok, mdl, REPO, LIMIT, s["text"],
+                                           section_words=s["words"])
+                    finally:
+                        _sm.ENC_NO_REPEAT = _keep
+                    _pub, _rec = _choose(r["summary"], _draft, s["text"])
+                    r["summary_extractive"] = r["summary"]
+                    r["summary"] = _pub
+                    r["abstractive"] = _rec
+                    r["findings"] = [x["token"] for x in check(_pub, s["text"])]
             else:
                 ps = [{"label": "part %d of %d" % (n + 1, len(parts)),
                        "words": len(p.split()),
                        "summary": summarise(tok, mdl, REPO, LIMIT, p)}
                       for n, p in enumerate(parts)]
-                r["summary"] = summarise(tok, mdl, REPO, LIMIT,
-                                         " ".join(p["summary"] for p in ps), longer=True)
+                _stitch = " ".join(p["summary"] for p in ps)
+                # the COMBINING step is where coverage was being thrown away: the parts covered
+                # the whole section, then this call squeezed them back into a fixed 80 tokens, so a
+                # 400-word clause still came out as 34 words. It now scales with the section.
+                r["summary"] = summarise(tok, mdl, REPO, LIMIT, _stitch, longer=True,
+                                         section_words=s["words"])
+                # A long section gets the same treatment as a short one. Without this the
+                # abstractive path covered only sections that fit BART's window in one pass -- and
+                # long sections are exactly where "the summary is just the opening" hurts most.
+                if os.environ.get("ABSTRACTIVE", "1") != "0":
+                    import pipeline.summarise as _sm2
+                    from pipeline.safe_abstractive import choose as _choose2
+                    _k2 = _sm2.ENC_NO_REPEAT
+                    try:
+                        _sm2.ENC_NO_REPEAT = int(os.environ.get("ABS_N", "6"))
+                        _d2 = summarise(tok, mdl, REPO, LIMIT, _stitch, longer=True,
+                                        section_words=s["words"])
+                    finally:
+                        _sm2.ENC_NO_REPEAT = _k2
+                    # checked against the WHOLE section, not the stitched part summaries: a figure
+                    # absent from the section is invented even if a part summary repeated it.
+                    _p2, _r2 = _choose2(r["summary"], _d2, s["text"])
+                    r["summary_extractive"] = r["summary"]
+                    r["summary"] = _p2
+                    r["abstractive"] = _r2
+                    r["findings"] = [x["token"] for x in check(_p2, s["text"])]
                 r["parts"] = ps
             r["findings"] = [x["token"] for x in check(r["summary"], s["text"])]
         else:
@@ -160,7 +283,8 @@ def main():
     cap = int(os.environ.get("CAP", "0")) or None
     raw = open(src, encoding="utf-8", errors="replace").read()
     os.makedirs(outdir, exist_ok=True)
-    tok, mdl = load(REPO)
+    from pipeline.summarise import load                 # noqa: E402  (lazy: see the imports)
+    tok, mdl = load(REPO, "abstractive")
 
     from docling.document_converter import DocumentConverter
     t0 = time.time()

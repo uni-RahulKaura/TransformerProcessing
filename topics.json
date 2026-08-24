@@ -1,0 +1,5553 @@
+{
+ "derivation": {
+  "method": "titles harvested from 33 machine outlines + 51 human answer keys + 175 generated keys; normalised; embedded with BAAI/bge-small-en-v1.5; Ward-linkage agglomerative clustering over the 2,133 titles attested in a real document; cut at k=240 for cluster coherence; clusters consolidated into topics by hand with the merge recorded per topic in evidence.source_clusters",
+  "weighting": "document frequency, never raw occurrence count; real and generated corpora counted separately",
+  "real_docs": 82,
+  "generated_docs": 175,
+  "real_title_df_total": 4785,
+  "real_title_df_mapped": 4025,
+  "n_topics": 116,
+  "extended": {
+   "cuad": "the 41 canonical clause categories from the Contract Understanding Atticus Dataset, fetched from category_descriptions.csv rather than transcribed, so the wording is theirs",
+   "bills": "a hand-written statement taxonomy, each entry attested by section titles the seven telecom bills in this corpus actually print",
+   "note": "additive. The 54 derived topics are unchanged; these sit alongside them and go through the same grounding gate, so a label still cannot be published unless the section uses its vocabulary."
+  }
+ },
+ "topics": [
+  {
+   "topic": "definitions_and_interpretation",
+   "label": "definitions of the terms used in this document",
+   "label_short": "definitions",
+   "doctypes": [
+    "agreements",
+    "correspondence",
+    "regulation"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 53,
+    "real_title_df": 148,
+    "generated_docs_attesting": 98,
+    "generated_title_df": 236,
+    "distinct_titles": 51,
+    "doctype_df": {
+     "agreements": 211,
+     "mixed": 107,
+     "reports": 47,
+     "regulation": 16,
+     "correspondence": 3
+    },
+    "source_clusters": [
+     "definitions",
+     "interpretation",
+     "exhibit definitions",
+     "rules",
+     "encumbering title",
+     "scope"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "definitions",
+      "df_real": 25,
+      "df_gen": 31
+     },
+     {
+      "title": "certain terms",
+      "df_real": 14,
+      "df_gen": 26
+     },
+     {
+      "title": "exhibit definitions",
+      "df_real": 14,
+      "df_gen": 27
+     },
+     {
+      "title": "exhibits",
+      "df_real": 6,
+      "df_gen": 4
+     },
+     {
+      "title": "interpretation",
+      "df_real": 5,
+      "df_gen": 67
+     },
+     {
+      "title": "encumbering title",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "interpretation; headings",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "scope",
+      "df_real": 3,
+      "df_gen": 66
+     },
+     {
+      "title": "definition",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "rules",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "headings",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "witnesseth",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "term_and_termination",
+   "label": "the term of the agreement, its renewal, and how it can be terminated",
+   "label_short": "termination",
+   "doctypes": [
+    "agreements",
+    "correspondence",
+    "regulation"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 29,
+    "real_title_df": 81,
+    "generated_docs_attesting": 90,
+    "generated_title_df": 200,
+    "distinct_titles": 30,
+    "doctype_df": {
+     "agreements": 146,
+     "correspondence": 88,
+     "mixed": 40,
+     "reports": 5,
+     "regulation": 2
+    },
+    "source_clusters": [
+     "termination",
+     "cancellation"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "termination",
+      "df_real": 16,
+      "df_gen": 13
+     },
+     {
+      "title": "term and termination",
+      "df_real": 15,
+      "df_gen": 55
+     },
+     {
+      "title": "effects of termination",
+      "df_real": 8,
+      "df_gen": 14
+     },
+     {
+      "title": "effect of termination",
+      "df_real": 3,
+      "df_gen": 20
+     },
+     {
+      "title": "cancellation",
+      "df_real": 2,
+      "df_gen": 16
+     },
+     {
+      "title": "termination rights",
+      "df_real": 2,
+      "df_gen": 34
+     },
+     {
+      "title": "end of term removal",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "termination for cause",
+      "df_real": 2,
+      "df_gen": 48
+     },
+     {
+      "title": "end of term exhibiting",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "other termination rights",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "termination for nonpayment",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "end of term; redistribution",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "confidentiality",
+   "label": "keeping information confidential and restrictions on disclosing it",
+   "label_short": "confidentiality",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 33,
+    "real_title_df": 88,
+    "generated_docs_attesting": 105,
+    "generated_title_df": 191,
+    "distinct_titles": 24,
+    "doctype_df": {
+     "agreements": 186,
+     "correspondence": 54,
+     "mixed": 38,
+     "reports": 1
+    },
+    "source_clusters": [
+     "confidentiality",
+     "required disclosures"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "confidentiality",
+      "df_real": 25,
+      "df_gen": 87
+     },
+     {
+      "title": "required disclosures",
+      "df_real": 10,
+      "df_gen": 13
+     },
+     {
+      "title": "confidentiality obligations",
+      "df_real": 10,
+      "df_gen": 11
+     },
+     {
+      "title": "confidentiality exclusions",
+      "df_real": 8,
+      "df_gen": 0
+     },
+     {
+      "title": "usa patriot act disclosures",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "mutual non-disclosure agreement",
+      "df_real": 3,
+      "df_gen": 5
+     },
+     {
+      "title": "mutual",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "exclusions",
+      "df_real": 2,
+      "df_gen": 55
+     },
+     {
+      "title": "compulsory disclosure",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "us privacy requirements",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "confidential information",
+      "df_real": 2,
+      "df_gen": 20
+     },
+     {
+      "title": "restrictions on use and disclosure",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "data_protection_and_privacy",
+   "label": "protection of personal data and privacy obligations",
+   "label_short": "data protection",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 30,
+    "real_title_df": 302,
+    "generated_docs_attesting": 74,
+    "generated_title_df": 98,
+    "distinct_titles": 128,
+    "doctype_df": {
+     "agreements": 328,
+     "correspondence": 35,
+     "mixed": 23,
+     "reports": 9,
+     "regulation": 5
+    },
+    "source_clusters": [
+     "data protection law(s)",
+     "personal data",
+     "processing of data",
+     "transfers of personal data",
+     "authorized sub-processors",
+     "data protection agreement",
+     "rights of data subjects",
+     "data processing addendum",
+     "standard contractual clauses",
+     "aggregate data",
+     "duration of processing and erasure or return of data",
+     "competent supervisory authority",
+     "review of legality and data minimisation"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "personal data",
+      "df_real": 10,
+      "df_gen": 11
+     },
+     {
+      "title": "aggregate data",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "processing of data",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "data protection law(s)",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "authorized sub-processors",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "rights of data subjects",
+      "df_real": 9,
+      "df_gen": 0
+     },
+     {
+      "title": "transfers of personal data",
+      "df_real": 9,
+      "df_gen": 0
+     },
+     {
+      "title": "data processing addendum",
+      "df_real": 8,
+      "df_gen": 6
+     },
+     {
+      "title": "security of personal data",
+      "df_real": 8,
+      "df_gen": 0
+     },
+     {
+      "title": "standard contractual clauses",
+      "df_real": 8,
+      "df_gen": 0
+     },
+     {
+      "title": "details of processing",
+      "df_real": 6,
+      "df_gen": 5
+     },
+     {
+      "title": "description of transfer",
+      "df_real": 6,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "information_security",
+   "label": "information security controls and handling of security incidents",
+   "label_short": "information security",
+   "doctypes": [
+    "agreements",
+    "statements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 38,
+    "real_title_df": 79,
+    "generated_docs_attesting": 71,
+    "generated_title_df": 110,
+    "distinct_titles": 25,
+    "doctype_df": {
+     "agreements": 134,
+     "mixed": 36,
+     "statements": 17,
+     "regulation": 1,
+     "correspondence": 1
+    },
+    "source_clusters": [
+     "customer proprietary network information (cpni)",
+     "security incident",
+     "security documentation"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "customer proprietary network information (cpni)",
+      "df_real": 14,
+      "df_gen": 3
+     },
+     {
+      "title": "security incident",
+      "df_real": 12,
+      "df_gen": 9
+     },
+     {
+      "title": "security incident(s)",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "security documentation",
+      "df_real": 9,
+      "df_gen": 0
+     },
+     {
+      "title": "documentation",
+      "df_real": 4,
+      "df_gen": 68
+     },
+     {
+      "title": "security",
+      "df_real": 3,
+      "df_gen": 16
+     },
+     {
+      "title": "security of processing",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "security program",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "security incidents",
+      "df_real": 2,
+      "df_gen": 14
+     },
+     {
+      "title": "incident prioritization",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "documentation and compliance",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "supplier's ipv6 roadmap and compliance",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "intellectual_property",
+   "label": "ownership of intellectual property and licences granted",
+   "label_short": "intellectual property",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 33,
+    "real_title_df": 87,
+    "generated_docs_attesting": 65,
+    "generated_title_df": 84,
+    "distinct_titles": 36,
+    "doctype_df": {
+     "agreements": 128,
+     "correspondence": 35,
+     "regulation": 2,
+     "mixed": 2,
+     "reports": 2,
+     "statements": 2
+    },
+    "source_clusters": [
+     "proprietary rights",
+     "license grant",
+     "prevailing party rights",
+     "feedback"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "feedback",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "proprietary rights",
+      "df_real": 9,
+      "df_gen": 0
+     },
+     {
+      "title": "intellectual property rights to the services",
+      "df_real": 8,
+      "df_gen": 0
+     },
+     {
+      "title": "intellectual property",
+      "df_real": 4,
+      "df_gen": 46
+     },
+     {
+      "title": "prevailing party rights",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "license grant",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "**proprietary rights",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "intellectual property rights",
+      "df_real": 3,
+      "df_gen": 24
+     },
+     {
+      "title": "license",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "updates",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "grant of rights",
+      "df_real": 2,
+      "df_gen": 14
+     },
+     {
+      "title": "superior rights",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "payment_and_invoicing",
+   "label": "prices, fees, invoicing and when payment is due",
+   "label_short": "payment and fees",
+   "doctypes": [
+    "agreements",
+    "statements",
+    "correspondence",
+    "regulation"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 40,
+    "real_title_df": 137,
+    "generated_docs_attesting": 98,
+    "generated_title_df": 187,
+    "distinct_titles": 65,
+    "doctype_df": {
+     "agreements": 216,
+     "correspondence": 47,
+     "mixed": 24,
+     "statements": 19,
+     "regulation": 9,
+     "reports": 9
+    },
+    "source_clusters": [
+     "payment terms",
+     "invoicing",
+     "pricing",
+     "currency",
+     "fixed fees",
+     "legal fees",
+     "expenses"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "payment terms",
+      "df_real": 13,
+      "df_gen": 14
+     },
+     {
+      "title": "expenses",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "payments",
+      "df_real": 9,
+      "df_gen": 6
+     },
+     {
+      "title": "invoicing",
+      "df_real": 7,
+      "df_gen": 26
+     },
+     {
+      "title": "pricing",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "legal fees",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "attorneys' fees",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "plan rate adjustment",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "rates",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "invoice",
+      "df_real": 2,
+      "df_gen": 3
+     },
+     {
+      "title": "payment",
+      "df_real": 2,
+      "df_gen": 55
+     },
+     {
+      "title": "currency",
+      "df_real": 2,
+      "df_gen": 35
+     }
+    ]
+   }
+  },
+  {
+   "topic": "taxes_and_surcharges",
+   "label": "taxes, surcharges and government fees",
+   "label_short": "taxes",
+   "doctypes": [
+    "agreements",
+    "reports",
+    "statements",
+    "correspondence",
+    "regulation"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 35,
+    "real_title_df": 48,
+    "generated_docs_attesting": 116,
+    "generated_title_df": 116,
+    "distinct_titles": 9,
+    "doctype_df": {
+     "statements": 45,
+     "agreements": 40,
+     "correspondence": 35,
+     "mixed": 32,
+     "reports": 12
+    },
+    "source_clusters": [
+     "taxes"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "taxes",
+      "df_real": 17,
+      "df_gen": 86
+     },
+     {
+      "title": "taxes and other governmental charges",
+      "df_real": 14,
+      "df_gen": 20
+     },
+     {
+      "title": "surcharges, taxes and gov fees",
+      "df_real": 9,
+      "df_gen": 0
+     },
+     {
+      "title": "certain definitions re: taxes",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "additional provisions re: taxes",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "taxation",
+      "df_real": 1,
+      "df_gen": 6
+     },
+     {
+      "title": "income taxes",
+      "df_real": 1,
+      "df_gen": 4
+     },
+     {
+      "title": "taxes & gov fees",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "provision for income taxes",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "indemnification",
+   "label": "one party indemnifying the other against claims and losses",
+   "label_short": "indemnification",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 27,
+    "real_title_df": 37,
+    "generated_docs_attesting": 57,
+    "generated_title_df": 57,
+    "distinct_titles": 10,
+    "doctype_df": {
+     "agreements": 47,
+     "correspondence": 37,
+     "mixed": 10
+    },
+    "source_clusters": [
+     "indemnification"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "indemnification",
+      "df_real": 14,
+      "df_gen": 47
+     },
+     {
+      "title": "indemnity",
+      "df_real": 9,
+      "df_gen": 10
+     },
+     {
+      "title": "insurance & indemnification",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "mutual indemnification",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "indemnification exception",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "indemnification; insurance",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "funding indemnification",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "indemnity and insurance",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "expenses; indemnification",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "indemnification by client",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "liability_and_warranties",
+   "label": "limits on liability, warranties given and warranty disclaimers",
+   "label_short": "liability and warranties",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 31,
+    "real_title_df": 114,
+    "generated_docs_attesting": 108,
+    "generated_title_df": 283,
+    "distinct_titles": 39,
+    "doctype_df": {
+     "agreements": 215,
+     "correspondence": 103,
+     "mixed": 75,
+     "statements": 3,
+     "regulation": 1
+    },
+    "source_clusters": [
+     "limitation of liability",
+     "disclaimers",
+     "representations and warranties",
+     "remedies",
+     "warranty"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "remedies",
+      "df_real": 15,
+      "df_gen": 99
+     },
+     {
+      "title": "limitation of liability",
+      "df_real": 14,
+      "df_gen": 56
+     },
+     {
+      "title": "disclaimers",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "injunctive relief",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "warranties and disclaimers",
+      "df_real": 7,
+      "df_gen": 0
+     },
+     {
+      "title": "disclaimer",
+      "df_real": 3,
+      "df_gen": 13
+     },
+     {
+      "title": "damages",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "warranty",
+      "df_real": 2,
+      "df_gen": 39
+     },
+     {
+      "title": "liability",
+      "df_real": 2,
+      "df_gen": 18
+     },
+     {
+      "title": "restoration",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "equitable relief",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "general warranties",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "insurance",
+   "label": "required insurance coverage",
+   "label_short": "insurance",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 17,
+    "real_title_df": 28,
+    "generated_docs_attesting": 64,
+    "generated_title_df": 64,
+    "distinct_titles": 12,
+    "doctype_df": {
+     "agreements": 41,
+     "correspondence": 40,
+     "mixed": 10,
+     "regulation": 1
+    },
+    "source_clusters": [
+     "insurance"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "insurance",
+      "df_real": 14,
+      "df_gen": 64
+     },
+     {
+      "title": "coverage",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "insurers",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "permits; insurance",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "**insurance",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "insurance coverages",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "insurer/self insurer",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "workers' compensation insurance",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "professional liability insurance",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "maintenance of property; insurance",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "commercial general liability insurance",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "commercial automobile liability insurance",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "governing_law_and_jurisdiction",
+   "label": "which law governs and which courts have jurisdiction",
+   "label_short": "governing law",
+   "doctypes": [
+    "agreements",
+    "correspondence",
+    "regulation"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 31,
+    "real_title_df": 33,
+    "generated_docs_attesting": 101,
+    "generated_title_df": 145,
+    "distinct_titles": 10,
+    "doctype_df": {
+     "correspondence": 70,
+     "agreements": 60,
+     "mixed": 43,
+     "statements": 4,
+     "reports": 1
+    },
+    "source_clusters": [
+     "governing law"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "governing law",
+      "df_real": 15,
+      "df_gen": 55
+     },
+     {
+      "title": "governing law and venue",
+      "df_real": 6,
+      "df_gen": 69
+     },
+     {
+      "title": "choice of law",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "clause 9 - governing law",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "clause 17 - governing law",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "clause 18 - choice of forum and jurisdiction",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "governing law and jurisdiction",
+      "df_real": 1,
+      "df_gen": 21
+     },
+     {
+      "title": "governing law; forum selection",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "choice of forum and jurisdiction",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "governing law; submission to jurisdiction",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "dispute_resolution",
+   "label": "resolving disputes by escalation, mediation, arbitration or litigation",
+   "label_short": "dispute resolution",
+   "doctypes": [
+    "agreements",
+    "correspondence",
+    "regulation"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 21,
+    "real_title_df": 35,
+    "generated_docs_attesting": 47,
+    "generated_title_df": 50,
+    "distinct_titles": 20,
+    "doctype_df": {
+     "correspondence": 37,
+     "agreements": 34,
+     "regulation": 7,
+     "reports": 7
+    },
+    "source_clusters": [
+     "dispute resolution",
+     "injunction"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "dispute resolution",
+      "df_real": 8,
+      "df_gen": 39
+     },
+     {
+      "title": "conflicts",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "injunction",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "litigation",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "enforcement",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "infringement",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "civil penalties for customers",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "clause 7 - mediation and jurisdiction",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "civil penalties for defaulting persons",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "disputes",
+      "df_real": 1,
+      "df_gen": 7
+     },
+     {
+      "title": "sanctions",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "jurisdiction, etc",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "notices",
+   "label": "how formal notices must be delivered between the parties",
+   "label_short": "notices",
+   "doctypes": [
+    "agreements",
+    "correspondence",
+    "statements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 30,
+    "real_title_df": 45,
+    "generated_docs_attesting": 103,
+    "generated_title_df": 141,
+    "distinct_titles": 12,
+    "doctype_df": {
+     "agreements": 107,
+     "correspondence": 44,
+     "mixed": 33,
+     "regulation": 2
+    },
+    "source_clusters": [
+     "notices"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "notices",
+      "df_real": 26,
+      "df_gen": 84
+     },
+     {
+      "title": "notification",
+      "df_real": 4,
+      "df_gen": 35
+     },
+     {
+      "title": "notice",
+      "df_real": 3,
+      "df_gen": 13
+     },
+     {
+      "title": "delivery of notices",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "notification and defense",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "to you a notice by registered or certified mail or overnight courier service at",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "prompt notice",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "notice of default",
+      "df_real": 1,
+      "df_gen": 9
+     },
+     {
+      "title": "telephonic notices",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "notice of record date",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "notices; electronic communications",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "notices; effectiveness; electronic communication",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "assignment_and_transfer",
+   "label": "assignment of the contract to a third party, and change of control",
+   "label_short": "assignment",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 25,
+    "real_title_df": 37,
+    "generated_docs_attesting": 49,
+    "generated_title_df": 67,
+    "distinct_titles": 13,
+    "doctype_df": {
+     "mixed": 53,
+     "agreements": 50,
+     "correspondence": 1
+    },
+    "source_clusters": [
+     "assignment"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "assignment",
+      "df_real": 15,
+      "df_gen": 49
+     },
+     {
+      "title": "successors and assigns",
+      "df_real": 4,
+      "df_gen": 6
+     },
+     {
+      "title": "assignment and subletting",
+      "df_real": 4,
+      "df_gen": 10
+     },
+     {
+      "title": "assignee",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "assignor",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "further assignment, subletting",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "requirements for assignments, transfers",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "**assignment",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "no assignment",
+      "df_real": 1,
+      "df_gen": 2
+     },
+     {
+      "title": "successor agent",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "no assignment or delegation",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "assignments and participations",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "force_majeure",
+   "label": "events beyond a party's control excusing performance",
+   "label_short": "force majeure",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 29,
+    "real_title_df": 42,
+    "generated_docs_attesting": 79,
+    "generated_title_df": 79,
+    "distinct_titles": 18,
+    "doctype_df": {
+     "agreements": 45,
+     "correspondence": 36,
+     "mixed": 35,
+     "regulation": 4,
+     "reports": 1
+    },
+    "source_clusters": [
+     "force majeure",
+     "unavoidable delay"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "force majeure",
+      "df_real": 16,
+      "df_gen": 79
+     },
+     {
+      "title": "unavoidable delay",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "periodic",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "attornment",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "ambient noise",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "excusable delay",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "quiet enjoyment",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "supply redetermination event",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "sleep",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "headache",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "triggers",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "t e s l a",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "waiver_severability_amendment",
+   "label": "waiver, severability, amendment and other general provisions",
+   "label_short": "waiver and severability",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 36,
+    "real_title_df": 112,
+    "generated_docs_attesting": 44,
+    "generated_title_df": 88,
+    "distinct_titles": 49,
+    "doctype_df": {
+     "agreements": 184,
+     "mixed": 6,
+     "regulation": 4,
+     "correspondence": 3,
+     "reports": 3
+    },
+    "source_clusters": [
+     "waiver",
+     "severability",
+     "general provisions",
+     "invalidity",
+     "terms and conditions",
+     "no waiver"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "general provisions",
+      "df_real": 15,
+      "df_gen": 11
+     },
+     {
+      "title": "severability",
+      "df_real": 9,
+      "df_gen": 0
+     },
+     {
+      "title": "waiver",
+      "df_real": 6,
+      "df_gen": 0
+     },
+     {
+      "title": "invalidity",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "intentionally omitted",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "terms and conditions",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "terms",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "garbage",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "waivers",
+      "df_real": 2,
+      "df_gen": 6
+     },
+     {
+      "title": "no waiver",
+      "df_real": 2,
+      "df_gen": 34
+     },
+     {
+      "title": "illegality",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "non-waiver",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "compliance_and_regulatory",
+   "label": "compliance with applicable laws, export control and regulations",
+   "label_short": "compliance with laws",
+   "doctypes": [
+    "agreements",
+    "reports",
+    "statements",
+    "correspondence",
+    "regulation"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 24,
+    "real_title_df": 54,
+    "generated_docs_attesting": 105,
+    "generated_title_df": 165,
+    "distinct_titles": 19,
+    "doctype_df": {
+     "agreements": 114,
+     "mixed": 68,
+     "correspondence": 37
+    },
+    "source_clusters": [
+     "compliance with laws",
+     "export compliance"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "export compliance",
+      "df_real": 12,
+      "df_gen": 15
+     },
+     {
+      "title": "compliance with laws",
+      "df_real": 7,
+      "df_gen": 83
+     },
+     {
+      "title": "compliance",
+      "df_real": 5,
+      "df_gen": 67
+     },
+     {
+      "title": "data exporter",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "data importer",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "data exporter(s)",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "export",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "export control",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "export classification",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "compliance with requirements",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "local laws and obligations in case of access by public authorities",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "\u2013 local laws and obligations in case of access by public authorities",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "audit_and_records",
+   "label": "audit rights, record keeping and reporting obligations",
+   "label_short": "audit rights",
+   "doctypes": [
+    "agreements",
+    "correspondence",
+    "regulation"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 30,
+    "real_title_df": 50,
+    "generated_docs_attesting": 105,
+    "generated_title_df": 128,
+    "distinct_titles": 28,
+    "doctype_df": {
+     "agreements": 90,
+     "correspondence": 36,
+     "mixed": 36,
+     "reports": 8,
+     "regulation": 7,
+     "statements": 1
+    },
+    "source_clusters": [
+     "audit, cooperation and compliance",
+     "records and audits",
+     "information requests"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "audit, cooperation and compliance",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "audit",
+      "df_real": 4,
+      "df_gen": 53
+     },
+     {
+      "title": "reporting",
+      "df_real": 2,
+      "df_gen": 66
+     },
+     {
+      "title": "records and audits",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "information requests",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "how to report a concern",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "third party request for data",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "reporting, audit and compliance",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "audit rights and breach notification",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "third-party request for data exhibit",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "agreement compliance and records audit",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "reporting, information requests and audit",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "contract_structure_and_precedence",
+   "label": "the structure of the agreement, its exhibits, orders and order of precedence",
+   "label_short": "order of precedence",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 31,
+    "real_title_df": 86,
+    "generated_docs_attesting": 102,
+    "generated_title_df": 134,
+    "distinct_titles": 21,
+    "doctype_df": {
+     "agreements": 141,
+     "mixed": 43,
+     "correspondence": 35,
+     "regulation": 1
+    },
+    "source_clusters": [
+     "entire agreement",
+     "order form"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "entire agreement",
+      "df_real": 25,
+      "df_gen": 70
+     },
+     {
+      "title": "term of agreement",
+      "df_real": 12,
+      "df_gen": 13
+     },
+     {
+      "title": "order form",
+      "df_real": 8,
+      "df_gen": 14
+     },
+     {
+      "title": "order of precedence",
+      "df_real": 8,
+      "df_gen": 10
+     },
+     {
+      "title": "order forms",
+      "df_real": 6,
+      "df_gen": 0
+     },
+     {
+      "title": "orders",
+      "df_real": 4,
+      "df_gen": 9
+     },
+     {
+      "title": "order",
+      "df_real": 3,
+      "df_gen": 4
+     },
+     {
+      "title": "agreement",
+      "df_real": 3,
+      "df_gen": 4
+     },
+     {
+      "title": "order process",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "agreement term",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "scope of agreement",
+      "df_real": 2,
+      "df_gen": 10
+     },
+     {
+      "title": "each order distinct",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "signature_and_execution",
+   "label": "signature, execution and counterparts",
+   "label_short": "signatures",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 30,
+    "real_title_df": 59,
+    "generated_docs_attesting": 35,
+    "generated_title_df": 35,
+    "distinct_titles": 25,
+    "doctype_df": {
+     "agreements": 57,
+     "correspondence": 36,
+     "regulation": 1
+    },
+    "source_clusters": [
+     "signature block",
+     "authorized employees",
+     "for value received",
+     "counterparts"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "signature block",
+      "df_real": 12,
+      "df_gen": 0
+     },
+     {
+      "title": "authorized employees",
+      "df_real": 9,
+      "df_gen": 0
+     },
+     {
+      "title": "counterparts",
+      "df_real": 4,
+      "df_gen": 35
+     },
+     {
+      "title": "counterparts; electronic signature",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "authorized users",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "for value received",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "counterpart signatures",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "signature authenticated",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "attachment 1 to exhibit a",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "counterparts and fax signatures",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "your favor available by payment against your presentation to us of the",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "extension, you may draw hereunder by your presentation to us of your signed",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "parties_and_roles",
+   "label": "identifying the parties, their affiliates and their roles",
+   "label_short": "the parties",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 38,
+    "real_title_df": 186,
+    "generated_docs_attesting": 105,
+    "generated_title_df": 168,
+    "distinct_titles": 69,
+    "doctype_df": {
+     "agreements": 225,
+     "mixed": 77,
+     "correspondence": 38,
+     "regulation": 8,
+     "statements": 3,
+     "reports": 3
+    },
+    "source_clusters": [
+     "parties",
+     "third party beneficiaries",
+     "independent contractors",
+     "brokers",
+     "provider",
+     "most favored customer",
+     "customer",
+     "cooperation"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "cooperation",
+      "df_real": 14,
+      "df_gen": 66
+     },
+     {
+      "title": "third party beneficiaries",
+      "df_real": 12,
+      "df_gen": 0
+     },
+     {
+      "title": "customer",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "provider",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "customer data",
+      "df_real": 10,
+      "df_gen": 10
+     },
+     {
+      "title": "customer policies",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "independent contractors",
+      "df_real": 10,
+      "df_gen": 35
+     },
+     {
+      "title": "provider services",
+      "df_real": 8,
+      "df_gen": 0
+     },
+     {
+      "title": "brokers",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "parties",
+      "df_real": 3,
+      "df_gen": 7
+     },
+     {
+      "title": "list of parties",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "independent contractor",
+      "df_real": 3,
+      "df_gen": 35
+     }
+    ]
+   }
+  },
+  {
+   "topic": "survival",
+   "label": "which obligations survive expiry or termination",
+   "label_short": "survival",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 15,
+    "real_title_df": 20,
+    "generated_docs_attesting": 99,
+    "generated_title_df": 143,
+    "distinct_titles": 8,
+    "doctype_df": {
+     "agreements": 90,
+     "mixed": 39,
+     "correspondence": 34
+    },
+    "source_clusters": [
+     "survival"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "survival",
+      "df_real": 9,
+      "df_gen": 99
+     },
+     {
+      "title": "abatement",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "mitigation",
+      "df_real": 2,
+      "df_gen": 35
+     },
+     {
+      "title": "surviving provisions",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "survival of obligations",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "environmental matters",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "mitigation of obligations",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "physical and environmental security",
+      "df_real": 1,
+      "df_gen": 9
+     }
+    ]
+   }
+  },
+  {
+   "topic": "service_levels_and_support",
+   "label": "service level commitments, availability, downtime credits and technical support",
+   "label_short": "service levels",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 24,
+    "real_title_df": 115,
+    "generated_docs_attesting": 39,
+    "generated_title_df": 67,
+    "distinct_titles": 46,
+    "doctype_df": {
+     "agreements": 152,
+     "mixed": 26,
+     "reports": 4
+    },
+    "source_clusters": [
+     "service level agreement",
+     "support priorities",
+     "scheduled downtime, service level commitment and credits",
+     "business continuity plan",
+     "performance metrics"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "service level agreement",
+      "df_real": 15,
+      "df_gen": 2
+     },
+     {
+      "title": "scheduled downtime, service level commitment and credits",
+      "df_real": 12,
+      "df_gen": 2
+     },
+     {
+      "title": "support priorities",
+      "df_real": 9,
+      "df_gen": 0
+     },
+     {
+      "title": "technical support services",
+      "df_real": 8,
+      "df_gen": 8
+     },
+     {
+      "title": "master software as a service agreement",
+      "df_real": 8,
+      "df_gen": 0
+     },
+     {
+      "title": "priority levels",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "service level agreement - product availability",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "support plans",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "support",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "user support",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "move-in priority",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "support services",
+      "df_real": 2,
+      "df_gen": 8
+     }
+    ]
+   }
+  },
+  {
+   "topic": "deliverables_and_scope_of_work",
+   "label": "scope of work, deliverables, statements of work and acceptance",
+   "label_short": "scope of work",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 29,
+    "real_title_df": 84,
+    "generated_docs_attesting": 91,
+    "generated_title_df": 148,
+    "distinct_titles": 48,
+    "doctype_df": {
+     "agreements": 135,
+     "correspondence": 58,
+     "mixed": 35,
+     "regulation": 2,
+     "statements": 2
+    },
+    "source_clusters": [
+     "statement of work",
+     "deliverables",
+     "project management",
+     "acceptance",
+     "quality assurance"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "statement of work",
+      "df_real": 7,
+      "df_gen": 30
+     },
+     {
+      "title": "acceptance",
+      "df_real": 4,
+      "df_gen": 40
+     },
+     {
+      "title": "deliverables",
+      "df_real": 4,
+      "df_gen": 46
+     },
+     {
+      "title": "quality assurance",
+      "df_real": 3,
+      "df_gen": 6
+     },
+     {
+      "title": "project management",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "sow deliverables and scope of work",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "standards",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "project scope",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "delivery condition",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "delivery of premises",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "delivery of solutions",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "service specifications",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "personnel_and_staffing",
+   "label": "personnel, staffing and key people assigned to the work",
+   "label_short": "staffing",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 10,
+    "real_title_df": 25,
+    "generated_docs_attesting": 16,
+    "generated_title_df": 16,
+    "distinct_titles": 20,
+    "doctype_df": {
+     "correspondence": 16,
+     "agreements": 13,
+     "mixed": 11,
+     "regulation": 1
+    },
+    "source_clusters": [
+     "sec. 3.05 personnel",
+     "background checks"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "background checks",
+      "df_real": 5,
+      "df_gen": 0
+     },
+     {
+      "title": "background",
+      "df_real": 2,
+      "df_gen": 16
+     },
+     {
+      "title": "status",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "status history",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "status reports",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "sec. 3.05 personnel",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "background information",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "sec. 3.02 requirements",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "sec. 3.01 scope of work",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "sec. 3.08 contract type",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "sec. 3.11 contract payment",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "sec. 3.12 location of work",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "use_restrictions_and_authorized_users",
+   "label": "restrictions on how the service may be used and who may use it",
+   "label_short": "usage restrictions",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 29,
+    "real_title_df": 85,
+    "generated_docs_attesting": 35,
+    "generated_title_df": 35,
+    "distinct_titles": 30,
+    "doctype_df": {
+     "agreements": 114,
+     "regulation": 2,
+     "reports": 2,
+     "statements": 2
+    },
+    "source_clusters": [
+     "restrictions",
+     "application",
+     "non-aiq services and customer data"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "non-aiq services and customer data",
+      "df_real": 12,
+      "df_gen": 0
+     },
+     {
+      "title": "acquisition of non-aiq products and services",
+      "df_real": 12,
+      "df_gen": 0
+     },
+     {
+      "title": "restrictions",
+      "df_real": 11,
+      "df_gen": 0
+     },
+     {
+      "title": "non-provider services",
+      "df_real": 6,
+      "df_gen": 0
+     },
+     {
+      "title": "purpose limitation",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "non-supplier services",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "application",
+      "df_real": 2,
+      "df_gen": 35
+     },
+     {
+      "title": "name: [___]",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "permitted uses",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "use guidelines",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "use of gap name",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "restrictions on use",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "publicity_and_marketing",
+   "label": "publicity, press releases and use of the other party's name or marks",
+   "label_short": "publicity",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 15,
+    "real_title_df": 18,
+    "generated_docs_attesting": 77,
+    "generated_title_df": 77,
+    "distinct_titles": 6,
+    "doctype_df": {
+     "correspondence": 35,
+     "mixed": 35,
+     "agreements": 24,
+     "reports": 1
+    },
+    "source_clusters": [
+     "publicity"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "publicity",
+      "df_real": 10,
+      "df_gen": 77
+     },
+     {
+      "title": "no publicity",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "build and activate audiences",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "business user flexibility, audience segmentation and activation",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "audiences",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "business seasonality and product introductions",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "rent_and_lease_charges",
+   "label": "rent, additional rent and other charges payable under a lease",
+   "label_short": "rent",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 5,
+    "real_title_df": 31,
+    "generated_docs_attesting": 0,
+    "generated_title_df": 0,
+    "distinct_titles": 15,
+    "doctype_df": {
+     "agreements": 31
+    },
+    "source_clusters": [
+     "monthly base rent"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "monthly base rent",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "rents",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "base rent",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "interim rent",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "other tenant",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "additional rent",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "rent concessions",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "adjustments of rent",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "additional lease restrictions",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "miscellaneous lease modifications",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "joint and several liability of tenant",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "landlord's additional space contribution",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "premises_and_lease_term",
+   "label": "the leased premises, the sublease and the master lease",
+   "label_short": "the leased premises",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 14,
+    "real_title_df": 147,
+    "generated_docs_attesting": 52,
+    "generated_title_df": 80,
+    "distinct_titles": 73,
+    "doctype_df": {
+     "agreements": 177,
+     "mixed": 48,
+     "correspondence": 2
+    },
+    "source_clusters": [
+     "demise of sublease premises",
+     "sublease",
+     "master landlord's consent",
+     "settlement",
+     "corridor",
+     "subcontracting",
+     "casualty and eminent domain",
+     "additional covenants of subtenant",
+     "parking"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "sublease",
+      "df_real": 4,
+      "df_gen": 1
+     },
+     {
+      "title": "sublease term",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "subcontracting",
+      "df_real": 4,
+      "df_gen": 16
+     },
+     {
+      "title": "subtenant's default",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "sublandlord liability",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "master landlord's consent",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "subtenant representations",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "demise of sublease premises",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "sublandlord representations",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "designation of sublease premises",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "additional covenants of subtenant",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "provisions regarding master lease",
+      "df_real": 4,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "alterations_and_improvements",
+   "label": "alterations, tenant improvements, repairs and landlord work",
+   "label_short": "alterations",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 17,
+    "real_title_df": 105,
+    "generated_docs_attesting": 13,
+    "generated_title_df": 13,
+    "distinct_titles": 48,
+    "doctype_df": {
+     "agreements": 105,
+     "mixed": 13
+    },
+    "source_clusters": [
+     "modifications",
+     "landlord work",
+     "re-entry",
+     "construction drawings",
+     "tenant's cost"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "modifications",
+      "df_real": 12,
+      "df_gen": 0
+     },
+     {
+      "title": "alterations",
+      "df_real": 4,
+      "df_gen": 13
+     },
+     {
+      "title": "modification",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "re-entry",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "landlord work",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "tenant's cost",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "tenant's work",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "tenant repairs",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "landlord access",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "tenant election",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "alterations, etc",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "landlord repairs",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "building_services_and_utilities",
+   "label": "building services, utilities, HVAC, cleaning, signage and access hours",
+   "label_short": "building services",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "derived; cluster split by hand (polysemy) -- titles listed in evidence.hand_assigned_titles were taken individually rather than with their whole cluster",
+   "evidence": {
+    "real_docs_attesting": 13,
+    "real_title_df": 99,
+    "generated_docs_attesting": 0,
+    "generated_title_df": 0,
+    "distinct_titles": 51,
+    "doctype_df": {
+     "agreements": 92,
+     "regulation": 6,
+     "statements": 1
+    },
+    "source_clusters": [
+     "vaults",
+     "water",
+     "hvac service",
+     "signage",
+     "am gmt",
+     "fire stairs"
+    ],
+    "hand_assigned_titles": [
+     "equipment",
+     "pipes and conduits, etc",
+     "storage",
+     "items"
+    ],
+    "top_titles": [
+     {
+      "title": "signage",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "water",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "am gmt",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "pm gmt",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "vaults",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "cleaning",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "elevators",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "equipment",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "sprinkler",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "excavation",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "fire stairs",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "fire system",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "surrender_and_holdover",
+   "label": "surrender of the premises at end of term and holding over",
+   "label_short": "surrender of the premises",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 11,
+    "real_title_df": 33,
+    "generated_docs_attesting": 0,
+    "generated_title_df": 0,
+    "distinct_titles": 16,
+    "doctype_df": {
+     "agreements": 31,
+     "regulation": 2
+    },
+    "source_clusters": [
+     "surrender"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "surrender",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "holding over",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "possession and use",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "failure to exercise",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "demise",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "holdover",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "abandonment",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "surrender: holdover",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "reconciliation run-off",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "failure to give possession",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "defect",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "dissolution",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "security_deposit_and_credit_support",
+   "label": "security deposit, letter of credit and other credit support",
+   "label_short": "letter of credit",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 12,
+    "real_title_df": 66,
+    "generated_docs_attesting": 0,
+    "generated_title_df": 0,
+    "distinct_titles": 37,
+    "doctype_df": {
+     "agreements": 59,
+     "regulation": 5,
+     "reports": 1,
+     "statements": 1
+    },
+    "source_clusters": [
+     "letter of credit",
+     "deposit",
+     "beneficiary's signed and dated statement stating as follows"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "letter of credit",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "deposit",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "claim windows",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "security deposit",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "letter of credit no",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "wire identification",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "form of security letter",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "madison tenant work letter",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "security deposit procedures",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "irrevocable standby letter of credit number",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "beneficiary's signed and dated statement stating as follows",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "are drawing on such letter of credit for us$ ___, and you have not",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "credit_facility_and_advances",
+   "label": "a loan or credit facility: advances, lenders, agents and repayment",
+   "label_short": "loan advances",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 6,
+    "real_title_df": 48,
+    "generated_docs_attesting": 0,
+    "generated_title_df": 0,
+    "distinct_titles": 43,
+    "doctype_df": {
+     "agreements": 48
+    },
+    "source_clusters": [
+     "defaulting lenders",
+     "the advances",
+     "subsidiaries",
+     "the agent"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "the agent",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "subsidiaries",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "tenant's agents",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "defaulting lenders",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "subordination, notice to lessors and mortgagees",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "other agents",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "the advances",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "action by agent",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "borrowing notice",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "ratable advances",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "types of advances",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "agent individually",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "financial_statements",
+   "label": "the balance sheet, income statement and statement of cash flows",
+   "label_short": "financial statements",
+   "doctypes": [
+    "reports"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 31,
+    "real_title_df": 100,
+    "generated_docs_attesting": 27,
+    "generated_title_df": 105,
+    "distinct_titles": 24,
+    "doctype_df": {
+     "reports": 180,
+     "agreements": 24,
+     "correspondence": 1
+    },
+    "source_clusters": [
+     "balance sheet",
+     "statement of operations"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "statement of operations",
+      "df_real": 14,
+      "df_gen": 14
+     },
+     {
+      "title": "procedures",
+      "df_real": 13,
+      "df_gen": 0
+     },
+     {
+      "title": "balance sheet",
+      "df_real": 13,
+      "df_gen": 17
+     },
+     {
+      "title": "statement of cash flows",
+      "df_real": 13,
+      "df_gen": 17
+     },
+     {
+      "title": "operations",
+      "df_real": 12,
+      "df_gen": 14
+     },
+     {
+      "title": "financial statements",
+      "df_real": 12,
+      "df_gen": 27
+     },
+     {
+      "title": "processing operations",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "tax statements",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "expense statement",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "insurance procedures",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "daily operations",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "controls and procedures",
+      "df_real": 1,
+      "df_gen": 4
+     }
+    ]
+   }
+  },
+  {
+   "topic": "non_gaap_reconciliation",
+   "label": "non-GAAP measures and their reconciliation to GAAP",
+   "label_short": "non-GAAP measures",
+   "doctypes": [
+    "reports"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 33,
+    "real_title_df": 50,
+    "generated_docs_attesting": 35,
+    "generated_title_df": 52,
+    "distinct_titles": 10,
+    "doctype_df": {
+     "reports": 76,
+     "statements": 12,
+     "agreements": 9,
+     "mixed": 5
+    },
+    "source_clusters": [
+     "non-gaap financial information"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "non-gaap financial information",
+      "df_real": 14,
+      "df_gen": 31
+     },
+     {
+      "title": "reconciliation of gaap to non-gaap financial information",
+      "df_real": 14,
+      "df_gen": 17
+     },
+     {
+      "title": "important information",
+      "df_real": 11,
+      "df_gen": 0
+     },
+     {
+      "title": "information",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "information covered",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "information not covered",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "for your information",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "available information",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "financial information",
+      "df_real": 1,
+      "df_gen": 4
+     },
+     {
+      "title": "basic financial information",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "revenue_and_profitability",
+   "label": "revenue, gross margin, operating profit and profitability",
+   "label_short": "revenue and profit",
+   "doctypes": [
+    "reports",
+    "statements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 22,
+    "real_title_df": 60,
+    "generated_docs_attesting": 32,
+    "generated_title_df": 63,
+    "distinct_titles": 16,
+    "doctype_df": {
+     "reports": 105,
+     "agreements": 9,
+     "mixed": 5,
+     "statements": 2,
+     "regulation": 2
+    },
+    "source_clusters": [
+     "profit",
+     "revenue"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "profit",
+      "df_real": 14,
+      "df_gen": 17
+     },
+     {
+      "title": "revenue",
+      "df_real": 14,
+      "df_gen": 27
+     },
+     {
+      "title": "profitability",
+      "df_real": 13,
+      "df_gen": 19
+     },
+     {
+      "title": "allowance",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "deductibles",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "release of amounts withheld",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "payment of work costs; work allowance",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "payment of work allowance and tenant's deposit",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "in this bill cycle, we have allocated this amount as follows",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "gross margin",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "note 2 - revenue",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "payroll deductions",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "operations_and_production",
+   "label": "production volumes, deliveries, capacity and operational metrics",
+   "label_short": "production and deliveries",
+   "doctypes": [
+    "reports"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 31,
+    "real_title_df": 131,
+    "generated_docs_attesting": 59,
+    "generated_title_df": 151,
+    "distinct_titles": 33,
+    "doctype_df": {
+     "reports": 205,
+     "agreements": 55,
+     "mixed": 17,
+     "regulation": 5
+    },
+    "source_clusters": [
+     "volume",
+     "vehicle capacity",
+     "key metrics trailing 12 months (ttm)"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "volume",
+      "df_real": 14,
+      "df_gen": 17
+     },
+     {
+      "title": "summary",
+      "df_real": 14,
+      "df_gen": 17
+     },
+     {
+      "title": "financial summary",
+      "df_real": 14,
+      "df_gen": 24
+     },
+     {
+      "title": "operational summary",
+      "df_real": 14,
+      "df_gen": 22
+     },
+     {
+      "title": "key metrics trailing 12 months (ttm)",
+      "df_real": 12,
+      "df_gen": 0
+     },
+     {
+      "title": "product",
+      "df_real": 11,
+      "df_gen": 22
+     },
+     {
+      "title": "vehicle capacity",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "key metrics quarterly",
+      "df_real": 9,
+      "df_gen": 14
+     },
+     {
+      "title": "transparency",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "testing",
+      "df_real": 2,
+      "df_gen": 35
+     },
+     {
+      "title": "resolution time",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "benefit calculation periods",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "geographic_segments",
+   "label": "results and operations broken out by country or region",
+   "label_short": "regional results",
+   "doctypes": [
+    "reports"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 15,
+    "real_title_df": 44,
+    "generated_docs_attesting": 19,
+    "generated_title_df": 31,
+    "distinct_titles": 10,
+    "doctype_df": {
+     "reports": 75
+    },
+    "source_clusters": [
+     "us: california, nevada and texas"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "us: california, nevada and texas",
+      "df_real": 12,
+      "df_gen": 0
+     },
+     {
+      "title": "china: shanghai",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "europe: berlin-brandenburg",
+      "df_real": 9,
+      "df_gen": 0
+     },
+     {
+      "title": "apac: shanghai",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "europe and the middle east: berlin-brandenburg",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "japan",
+      "df_real": 1,
+      "df_gen": 4
+     },
+     {
+      "title": "europe",
+      "df_real": 1,
+      "df_gen": 15
+     },
+     {
+      "title": "americas",
+      "df_real": 1,
+      "df_gen": 4
+     },
+     {
+      "title": "greater china",
+      "df_real": 1,
+      "df_gen": 7
+     },
+     {
+      "title": "rest of asia pacific",
+      "df_real": 1,
+      "df_gen": 1
+     }
+    ]
+   }
+  },
+  {
+   "topic": "outlook_and_guidance",
+   "label": "forward guidance and expectations for future periods",
+   "label_short": "outlook",
+   "doctypes": [
+    "reports"
+   ],
+   "provenance": "derived; cluster split by hand (polysemy) -- titles listed in evidence.hand_assigned_titles were taken individually rather than with their whole cluster",
+   "evidence": {
+    "real_docs_attesting": 14,
+    "real_title_df": 14,
+    "generated_docs_attesting": 31,
+    "generated_title_df": 31,
+    "distinct_titles": 1,
+    "doctype_df": {
+     "reports": 40,
+     "mixed": 5
+    },
+    "source_clusters": [],
+    "hand_assigned_titles": [
+     "outlook"
+    ],
+    "top_titles": [
+     {
+      "title": "outlook",
+      "df_real": 14,
+      "df_gen": 31
+     }
+    ]
+   }
+  },
+  {
+   "topic": "forward_looking_statements",
+   "label": "the legal disclaimer about forward-looking statements",
+   "label_short": "forward-looking statements",
+   "doctypes": [
+    "reports"
+   ],
+   "provenance": "derived; cluster split by hand (polysemy) -- titles listed in evidence.hand_assigned_titles were taken individually rather than with their whole cluster",
+   "evidence": {
+    "real_docs_attesting": 33,
+    "real_title_df": 47,
+    "generated_docs_attesting": 49,
+    "generated_title_df": 73,
+    "distinct_titles": 10,
+    "doctype_df": {
+     "reports": 88,
+     "mixed": 15,
+     "agreements": 13,
+     "regulation": 3,
+     "correspondence": 1
+    },
+    "source_clusters": [
+     "forward-looking statements"
+    ],
+    "hand_assigned_titles": [
+     "webcast information"
+    ],
+    "top_titles": [
+     {
+      "title": "webcast information",
+      "df_real": 14,
+      "df_gen": 23
+     },
+     {
+      "title": "forward-looking statements",
+      "df_real": 14,
+      "df_gen": 42
+     },
+     {
+      "title": "future functionality",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "preliminary",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "terraces/setbacks",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "preliminary statement",
+      "df_real": 1,
+      "df_gen": 8
+     },
+     {
+      "title": "establishing a baseline",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "a look back and a look ahead",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "sec. 1.04 minimum responsiveness",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "respondent is bound by the four corners of its denial",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "product_and_technology",
+   "label": "products, engineering and core technology",
+   "label_short": "products and technology",
+   "doctypes": [
+    "reports"
+   ],
+   "provenance": "derived; cluster split by hand (polysemy) -- titles listed in evidence.hand_assigned_titles were taken individually rather than with their whole cluster",
+   "evidence": {
+    "real_docs_attesting": 28,
+    "real_title_df": 123,
+    "generated_docs_attesting": 23,
+    "generated_title_df": 43,
+    "distinct_titles": 52,
+    "doctype_df": {
+     "reports": 138,
+     "agreements": 22,
+     "mixed": 3,
+     "statements": 2,
+     "regulation": 1
+    },
+    "source_clusters": [
+     "vehicle and other software",
+     "battery, powertrain & manufacturing",
+     "electronic data interchange",
+     "cybertruck testing"
+    ],
+    "hand_assigned_titles": [
+     "core technology",
+     "energy generation and storage",
+     "energy storage"
+    ],
+    "top_titles": [
+     {
+      "title": "core technology",
+      "df_real": 14,
+      "df_gen": 17
+     },
+     {
+      "title": "vehicle and other software",
+      "df_real": 14,
+      "df_gen": 5
+     },
+     {
+      "title": "artificial intelligence software and hardware",
+      "df_real": 12,
+      "df_gen": 5
+     },
+     {
+      "title": "energy generation and storage",
+      "df_real": 8,
+      "df_gen": 4
+     },
+     {
+      "title": "battery, powertrain & manufacturing",
+      "df_real": 8,
+      "df_gen": 0
+     },
+     {
+      "title": "energy storage",
+      "df_real": 6,
+      "df_gen": 0
+     },
+     {
+      "title": "battery, powertrain and manufacturing",
+      "df_real": 6,
+      "df_gen": 5
+     },
+     {
+      "title": "automotive",
+      "df_real": 4,
+      "df_gen": 4
+     },
+     {
+      "title": "software",
+      "df_real": 2,
+      "df_gen": 3
+     },
+     {
+      "title": "comparable software",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "provision of software",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "electronic data interchange",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "results_highlights",
+   "label": "a summary of headline results for the period",
+   "label_short": "highlights",
+   "doctypes": [
+    "reports",
+    "statements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 35,
+    "real_title_df": 57,
+    "generated_docs_attesting": 49,
+    "generated_title_df": 70,
+    "distinct_titles": 14,
+    "doctype_df": {
+     "reports": 67,
+     "agreements": 33,
+     "statements": 14,
+     "mixed": 11,
+     "correspondence": 2
+    },
+    "source_clusters": [
+     "highlights"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "highlights",
+      "df_real": 14,
+      "df_gen": 22
+     },
+     {
+      "title": "talk activity",
+      "df_real": 11,
+      "df_gen": 3
+     },
+     {
+      "title": "other highlights",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "photos & charts",
+      "df_real": 8,
+      "df_gen": 17
+     },
+     {
+      "title": "recitals",
+      "df_real": 3,
+      "df_gen": 12
+     },
+     {
+      "title": "staging area",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "height stories. feet",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "viewed",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "activities",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "explore further",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "books and records",
+      "df_real": 1,
+      "df_gen": 16
+     },
+     {
+      "title": "meetings and books",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "equity_debt_and_capitalization",
+   "label": "shares, equity, debt, financing and capitalization",
+   "label_short": "shares and debt",
+   "doctypes": [
+    "reports",
+    "agreements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 28,
+    "real_title_df": 75,
+    "generated_docs_attesting": 106,
+    "generated_title_df": 110,
+    "distinct_titles": 57,
+    "doctype_df": {
+     "agreements": 71,
+     "reports": 34,
+     "statements": 33,
+     "mixed": 31,
+     "correspondence": 14,
+     "regulation": 2
+    },
+    "source_clusters": [
+     "use of proceeds",
+     "bankruptcy information",
+     "divestiture"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "bankruptcy information",
+      "df_real": 14,
+      "df_gen": 19
+     },
+     {
+      "title": "divestiture",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "use of proceeds",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "bankruptcy events",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "evidence of insurance",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "arrangements in respect of customer\u2019s financial exposure to wholesale price",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "losses",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "term debt",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "conditions",
+      "df_real": 1,
+      "df_gen": 66
+     },
+     {
+      "title": "investment",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "common stock",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "note 6 - debt",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "bill_summary_and_amount_due",
+   "label": "the bill total, the amount due, the due date and how to pay",
+   "label_short": "the amount due",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 19,
+    "real_title_df": 85,
+    "generated_docs_attesting": 4,
+    "generated_title_df": 4,
+    "distinct_titles": 23,
+    "doctype_df": {
+     "statements": 88,
+     "reports": 1
+    },
+    "source_clusters": [
+     "snapshot of your bill",
+     "automatic payment enrollment"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "snapshot of your bill",
+      "df_real": 14,
+      "df_gen": 3
+     },
+     {
+      "title": "california - questions about your bill?",
+      "df_real": 14,
+      "df_gen": 0
+     },
+     {
+      "title": "review your bill online",
+      "df_real": 11,
+      "df_gen": 0
+     },
+     {
+      "title": "bill summary by line",
+      "df_real": 7,
+      "df_gen": 1
+     },
+     {
+      "title": "questions about your bill?",
+      "df_real": 7,
+      "df_gen": 0
+     },
+     {
+      "title": "ways to pay",
+      "df_real": 6,
+      "df_gen": 0
+     },
+     {
+      "title": "questions about paying your bill?",
+      "df_real": 6,
+      "df_gen": 0
+     },
+     {
+      "title": "automatic payment enrollment",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "billing period",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "autopay",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "bill to",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "billing credits",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "charges_and_adjustments",
+   "label": "itemised charges, surcharges, credits, adjustments and late fees",
+   "label_short": "surcharges",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "derived; cluster split by hand (polysemy) -- titles listed in evidence.hand_assigned_titles were taken individually rather than with their whole cluster",
+   "evidence": {
+    "real_docs_attesting": 36,
+    "real_title_df": 109,
+    "generated_docs_attesting": 27,
+    "generated_title_df": 30,
+    "distinct_titles": 29,
+    "doctype_df": {
+     "statements": 108,
+     "agreements": 26,
+     "mixed": 5
+    },
+    "source_clusters": [
+     "since your last bill"
+    ],
+    "hand_assigned_titles": [
+     "account access",
+     "account balance",
+     "account-wide charges & credits",
+     "one-time charges & credits",
+     "the credits"
+    ],
+    "top_titles": [
+     {
+      "title": "account access",
+      "df_real": 14,
+      "df_gen": 0
+     },
+     {
+      "title": "since your last bill",
+      "df_real": 14,
+      "df_gen": 4
+     },
+     {
+      "title": "explanation of surcharges",
+      "df_real": 14,
+      "df_gen": 2
+     },
+     {
+      "title": "more on wireless taxes and surcharges",
+      "df_real": 14,
+      "df_gen": 0
+     },
+     {
+      "title": "charges by line details",
+      "df_real": 11,
+      "df_gen": 0
+     },
+     {
+      "title": "account-wide charges & credits",
+      "df_real": 8,
+      "df_gen": 0
+     },
+     {
+      "title": "late fee policy",
+      "df_real": 4,
+      "df_gen": 18
+     },
+     {
+      "title": "surcharges",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "late charges",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "miscellaneous charges",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "no additional charges",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "no minimum purchase commitment",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "usage_detail",
+   "label": "metered usage detail for each line, meter or service point",
+   "label_short": "usage detail",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 5,
+    "real_title_df": 15,
+    "generated_docs_attesting": 0,
+    "generated_title_df": 0,
+    "distinct_titles": 15,
+    "doctype_df": {
+     "statements": 15
+    },
+    "source_clusters": [
+     "apple iphone 16 pro"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "apple iphone 16 pro",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "andy apple iphone 16 (786-888-8754)",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "moni apple iphone 16 (786-211-0001)",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "papa apple iphone 16 (786-400-1177)",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "monkey apple iphone 7 (320-232-1525)",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "mia pham apple iphone 16 pro (916-652-9521)",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "hanh pham apple iphone 16 pro (916-652-9521)",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "ipad apple 10.5-inch ipad pro (320-247-1181)",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "henry apple iphone 12 pro esim (320-345-2314)",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "mathew jhonson apple iphone 15 (786-887-0159)",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "mathew jhonson apple iphone 16 (786-211-0001)",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "mathew jhonson apple iphone 16 (786-400-1177)",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "account_and_contact_details",
+   "label": "account details, contact information and address changes",
+   "label_short": "contact details",
+   "doctypes": [
+    "statements",
+    "correspondence"
+   ],
+   "provenance": "derived; cluster split by hand (polysemy) -- titles listed in evidence.hand_assigned_titles were taken individually rather than with their whole cluster",
+   "evidence": {
+    "real_docs_attesting": 22,
+    "real_title_df": 51,
+    "generated_docs_attesting": 0,
+    "generated_title_df": 0,
+    "distinct_titles": 18,
+    "doctype_df": {
+     "statements": 30,
+     "agreements": 21
+    },
+    "source_clusters": [
+     "verizon"
+    ],
+    "hand_assigned_titles": [
+     "(address)",
+     "address change",
+     "by phone",
+     "contact person",
+     "contact us",
+     "gap contact person",
+     "how to get in touch with us",
+     "messages for you",
+     "sublandlord's address",
+     "subtenant's address",
+     "person match"
+    ],
+    "top_titles": [
+     {
+      "title": "address change",
+      "df_real": 11,
+      "df_gen": 0
+     },
+     {
+      "title": "verizon",
+      "df_real": 7,
+      "df_gen": 0
+     },
+     {
+      "title": "by phone",
+      "df_real": 5,
+      "df_gen": 0
+     },
+     {
+      "title": "subtenant's address",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "sublandlord's address",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "(address)",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "contact person",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "my verizon app",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "gap contact person",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "live phone support",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "lenovo (and its affiliate motorola)",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "off-hour phone support via voicemail",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "utility_service_and_metering",
+   "label": "electricity, gas or water supply, metering and service points",
+   "label_short": "electricity supply",
+   "doctypes": [
+    "statements",
+    "regulation"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 12,
+    "real_title_df": 18,
+    "generated_docs_attesting": 0,
+    "generated_title_df": 0,
+    "distinct_titles": 10,
+    "doctype_df": {
+     "statements": 6,
+     "reports": 6,
+     "agreements": 4,
+     "regulation": 2
+    },
+    "source_clusters": [
+     "solar"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "solar",
+      "df_real": 6,
+      "df_gen": 0
+     },
+     {
+      "title": "electrical",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "electricity",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "arrangements for customer to deliver electricity to the grid",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "electric service",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "your energy bill",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "metering services",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "your electricity breakdown",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "get smarter with your smart meter",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "your average daily electric usage",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "plans_and_services_purchased",
+   "label": "which service plan or subscription tier the customer is on",
+   "label_short": "the service plan",
+   "doctypes": [
+    "statements",
+    "agreements"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 46,
+    "real_title_df": 78,
+    "generated_docs_attesting": 21,
+    "generated_title_df": 23,
+    "distinct_titles": 15,
+    "doctype_df": {
+     "agreements": 41,
+     "reports": 25,
+     "statements": 19,
+     "mixed": 15,
+     "correspondence": 1
+    },
+    "source_clusters": [
+     "service plan features & services"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "service plan features & services",
+      "df_real": 14,
+      "df_gen": 0
+     },
+     {
+      "title": "services",
+      "df_real": 12,
+      "df_gen": 15
+     },
+     {
+      "title": "beta services",
+      "df_real": 10,
+      "df_gen": 0
+     },
+     {
+      "title": "services and other",
+      "df_real": 10,
+      "df_gen": 3
+     },
+     {
+      "title": "implementation services",
+      "df_real": 8,
+      "df_gen": 0
+     },
+     {
+      "title": "services summary",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "energy & services and other",
+      "df_real": 4,
+      "df_gen": 3
+     },
+     {
+      "title": "services and other business",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "services & perks",
+      "df_real": 3,
+      "df_gen": 2
+     },
+     {
+      "title": "other services",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "improper use of services",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "services; condition precedent",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "proposal_and_procurement",
+   "label": "the request for proposals, bid submission and proposal evaluation",
+   "label_short": "requests for proposals",
+   "doctypes": [
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 10,
+    "real_title_df": 64,
+    "generated_docs_attesting": 0,
+    "generated_title_df": 0,
+    "distinct_titles": 57,
+    "doctype_df": {
+     "correspondence": 48,
+     "agreements": 14,
+     "reports": 2
+    },
+    "source_clusters": [
+     "order forms. this agreement will be implemented through one or more written orders that reference this agreement and contain such information",
+     "sec. 1.02 budget",
+     "no offer"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "no offer",
+      "df_real": 4,
+      "df_gen": 0
+     },
+     {
+      "title": "offer",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "offer notice",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "right of first offer",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "order forms. this agreement will be implemented through one or more written orders that reference this agreement and contain such information",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "form 10-q",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "\u2013 tax form",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "cost proposal",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "sec. 1.02 budget",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "sec. 6.09 protest",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "sec. 7.09 disputes",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "sec. 7.08 assignment",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "dates_and_certificates",
+   "label": "effective dates, commencement date certificates and other certifications",
+   "label_short": "effective dates",
+   "doctypes": [
+    "agreements",
+    "correspondence"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 17,
+    "real_title_df": 31,
+    "generated_docs_attesting": 77,
+    "generated_title_df": 126,
+    "distinct_titles": 22,
+    "doctype_df": {
+     "correspondence": 82,
+     "mixed": 39,
+     "agreements": 31,
+     "statements": 2,
+     "reports": 2,
+     "regulation": 1
+    },
+    "source_clusters": [
+     "sublease commencement date certificate",
+     "ssae certification"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "sublease commencement date certificate",
+      "df_real": 4,
+      "df_gen": 14
+     },
+     {
+      "title": "sublease commencement date",
+      "df_real": 3,
+      "df_gen": 0
+     },
+     {
+      "title": "effective date",
+      "df_real": 2,
+      "df_gen": 46
+     },
+     {
+      "title": "ssae certification",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "estoppel certificate",
+      "df_real": 2,
+      "df_gen": 4
+     },
+     {
+      "title": "extended beyond june 15, 2025. , in the event we send such notice of non",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "certification",
+      "df_real": 1,
+      "df_gen": 59
+     },
+     {
+      "title": "e february 12, 2025",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "regulatory references",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "regulation d compensation",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "tax compliance certificate",
+      "df_real": 1,
+      "df_gen": 0
+     },
+     {
+      "title": "bill date: february 16, 2025",
+      "df_real": 1,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "scheme_eligibility_and_discounts",
+   "label": "eligibility for a statutory scheme and the discounts recoverable under it",
+   "label_short": "scheme discounts",
+   "doctypes": [
+    "regulation"
+   ],
+   "provenance": "derived",
+   "evidence": {
+    "real_docs_attesting": 16,
+    "real_title_df": 109,
+    "generated_docs_attesting": 0,
+    "generated_title_df": 0,
+    "distinct_titles": 60,
+    "doctype_df": {
+     "regulation": 83,
+     "agreements": 20,
+     "reports": 3,
+     "correspondence": 2,
+     "statements": 1
+    },
+    "source_clusters": [
+     "supply price",
+     "discount recovery",
+     "scheme periods",
+     "separate supply contracts",
+     "qhs customers",
+     "diverse suppliers"
+    ],
+    "hand_assigned_titles": [],
+    "top_titles": [
+     {
+      "title": "supply price",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "qhs customers",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "scheme periods",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "abuse of scheme",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "support pricing",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "discount recovery",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "diverse suppliers",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "fmv determination",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "supplier obligations",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "reduction of discount",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "adjustment of discount",
+      "df_real": 2,
+      "df_gen": 0
+     },
+     {
+      "title": "calculation of discount",
+      "df_real": 2,
+      "df_gen": 0
+     }
+    ]
+   }
+  },
+  {
+   "topic": "cuad_document_name",
+   "label": "The name of the contract",
+   "label_short": "Document Name",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Document Name"
+   }
+  },
+  {
+   "topic": "cuad_parties",
+   "label": "The two or more parties who signed the contract",
+   "label_short": "Parties",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Parties"
+   }
+  },
+  {
+   "topic": "cuad_agreement_date",
+   "label": "The date of the contract",
+   "label_short": "Agreement Date",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Agreement Date"
+   }
+  },
+  {
+   "topic": "cuad_effective_date",
+   "label": "The date when the contract is effective",
+   "label_short": "Effective Date",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Effective Date"
+   }
+  },
+  {
+   "topic": "cuad_expiration_date",
+   "label": "On what date will the contract's initial term expire?",
+   "label_short": "Expiration Date",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Expiration Date"
+   }
+  },
+  {
+   "topic": "cuad_renewal_term",
+   "label": "What is the renewal term after the initial term expires? This includes automatic extensions and unilateral extensions with prior notice.",
+   "label_short": "Renewal Term",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Renewal Term"
+   }
+  },
+  {
+   "topic": "cuad_notice_period_to_terminate_renewal",
+   "label": "What is the notice period required to terminate renewal?",
+   "label_short": "Notice Period to Terminate R",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Notice Period to Terminate Renewal"
+   }
+  },
+  {
+   "topic": "cuad_governing_law",
+   "label": "Which state/country's law governs the interpretation of the contract?",
+   "label_short": "Governing Law",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Governing Law"
+   }
+  },
+  {
+   "topic": "cuad_most_favored_nation",
+   "label": "Is there a clause that if a third party gets better terms on the licensing or sale of technology/goods/services described in the contract, the buyer of such technology/goods/services under the contract shall be entitled to those better terms?",
+   "label_short": "Most Favored Nation",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Most Favored Nation"
+   }
+  },
+  {
+   "topic": "cuad_non_compete",
+   "label": "Is there a restriction on the ability of a party to compete with the counterparty or operate in a certain geography or business or technology sector?",
+   "label_short": "Non-Compete",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Non-Compete"
+   }
+  },
+  {
+   "topic": "cuad_exclusivity",
+   "label": "Is there an exclusive dealing\u00a0 commitment with the counterparty? This includes a commitment to procure all \u201crequirements\u201d from one party of certain technology, goods, or services or a prohibition on licensing or selling technology, goods or services to third parties, or a prohibition on\u00a0 collaborating or working with other parties), whether during the contract or\u00a0 after the contract ends (or both).",
+   "label_short": "Exclusivity",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Exclusivity"
+   }
+  },
+  {
+   "topic": "cuad_no_solicit_of_customers",
+   "label": "Is a party restricted from contracting or soliciting customers or partners of the counterparty, whether during the contract or after the contract ends (or both)?",
+   "label_short": "No-Solicit of Customers",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "No-Solicit of Customers"
+   }
+  },
+  {
+   "topic": "cuad_competitive_restriction_exception",
+   "label": "This category includes the exceptions or carveouts to Non-Compete, Exclusivity and No-Solicit of Customers above.",
+   "label_short": "Competitive Restriction Exce",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Competitive Restriction Exception"
+   }
+  },
+  {
+   "topic": "cuad_no_solicit_of_employees",
+   "label": "Is there a restriction on a party\u2019s soliciting or hiring employees and/or contractors from the\u00a0 counterparty, whether during the contract or after the contract ends (or both)?",
+   "label_short": "No-Solicit of Employees",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "No-Solicit of Employees"
+   }
+  },
+  {
+   "topic": "cuad_non_disparagement",
+   "label": "Is there a requirement on a party not to disparage the counterparty?",
+   "label_short": "Non-Disparagement",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Non-Disparagement"
+   }
+  },
+  {
+   "topic": "cuad_termination_for_convenience",
+   "label": "Can a party terminate this\u00a0 contract without cause (solely by giving a notice and allowing a waiting\u00a0 period to expire)?",
+   "label_short": "Termination for Convenience",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Termination for Convenience"
+   }
+  },
+  {
+   "topic": "cuad_rofr_rofo_rofn",
+   "label": "Is there a clause granting one party a right of first refusal, right of first offer or right of first negotiation to purchase, license, market, or distribute equity interest, technology, assets, products or services?",
+   "label_short": "Rofr/Rofo/Rofn",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Rofr/Rofo/Rofn"
+   }
+  },
+  {
+   "topic": "cuad_change_of_control",
+   "label": "Does one party have the right to terminate or is consent or notice required of the counterparty if such party undergoes a change of control, such as a merger, stock sale, transfer of all or substantially all of its assets or business, or assignment by operation of law?",
+   "label_short": "Change of Control",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Change of Control"
+   }
+  },
+  {
+   "topic": "cuad_anti_assignment",
+   "label": "Is consent or notice required of a party if the contract is assigned to a third party?",
+   "label_short": "Anti-Assignment",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Anti-Assignment"
+   }
+  },
+  {
+   "topic": "cuad_revenue_profit_sharing",
+   "label": "Is one party required to share revenue or profit with the counterparty for any technology, goods, or\u00a0services?",
+   "label_short": "Revenue/Profit Sharing",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Revenue/Profit Sharing"
+   }
+  },
+  {
+   "topic": "cuad_price_restrictions",
+   "label": "Is there a restriction on the\u00a0 ability of a party to raise or reduce prices of technology, goods, or\u00a0 services provided?",
+   "label_short": "Price Restrictions",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Price Restrictions"
+   }
+  },
+  {
+   "topic": "cuad_minimum_commitment",
+   "label": "Is there a minimum order size or minimum amount or units per-time period that one party must buy from the counterparty under the contract?",
+   "label_short": "Minimum Commitment",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Minimum Commitment"
+   }
+  },
+  {
+   "topic": "cuad_volume_restriction",
+   "label": "Is there a fee increase or consent requirement, etc. if one party\u2019s use of the product/services exceeds certain threshold?",
+   "label_short": "Volume Restriction",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Volume Restriction"
+   }
+  },
+  {
+   "topic": "cuad_ip_ownership_assignment",
+   "label": "Does intellectual property created\u00a0 by one party become the property of the counterparty, either per the terms of the contract or upon the occurrence of certain events?",
+   "label_short": "IP Ownership Assignment",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "IP Ownership Assignment"
+   }
+  },
+  {
+   "topic": "cuad_joint_ip_ownership",
+   "label": "Is there any clause providing for joint or shared ownership of intellectual property between the parties to the contract?",
+   "label_short": "Joint IP Ownership",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Joint IP Ownership"
+   }
+  },
+  {
+   "topic": "cuad_license_grant",
+   "label": "Does the contract contain a license granted by one party to its counterparty?",
+   "label_short": "License Grant",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "License Grant"
+   }
+  },
+  {
+   "topic": "cuad_non_transferable_license",
+   "label": "Does the contract limit the ability of a party to transfer the license being granted to a third party?",
+   "label_short": "Non-Transferable License",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Non-Transferable License"
+   }
+  },
+  {
+   "topic": "cuad_affiliate_license_licensor",
+   "label": "Does the contract contain a license grant by affiliates of the licensor or that includes intellectual property of affiliates of the licensor?",
+   "label_short": "Affiliate License-Licensor",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Affiliate License-Licensor"
+   }
+  },
+  {
+   "topic": "cuad_affiliate_license_licensee",
+   "label": "Does the contract contain a license grant to a licensee (incl. sublicensor) and the affiliates of such licensee/sublicensor?",
+   "label_short": "Affiliate License-Licensee",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Affiliate License-Licensee"
+   }
+  },
+  {
+   "topic": "cuad_unlimited_all_you_can_eat_license",
+   "label": "Is there a clause granting one party an \u201centerprise,\u201d \u201call you can eat\u201d or unlimited usage license?",
+   "label_short": "Unlimited/All-You-Can-Eat-Li",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Unlimited/All-You-Can-Eat-License"
+   }
+  },
+  {
+   "topic": "cuad_irrevocable_or_perpetual_license",
+   "label": "Does the contract contain a\u00a0 license grant that is irrevocable or perpetual?",
+   "label_short": "Irrevocable or Perpetual Lic",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Irrevocable or Perpetual License"
+   }
+  },
+  {
+   "topic": "cuad_source_code_escrow",
+   "label": "Is one party required to deposit its source code into escrow with a third party, which can be released to the counterparty upon the occurrence of certain events (bankruptcy,\u00a0 insolvency, etc.)?",
+   "label_short": "Source Code Escrow",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Source Code Escrow"
+   }
+  },
+  {
+   "topic": "cuad_post_termination_services",
+   "label": "Is a party subject to obligations after the termination or expiration of a contract, including any post-termination transition, payment, transfer of IP, wind-down, last-buy, or similar commitments?",
+   "label_short": "Post-Termination Services",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Post-Termination Services"
+   }
+  },
+  {
+   "topic": "cuad_audit_rights",
+   "label": "Does a party have the right to\u00a0 audit the books, records, or physical locations of the counterparty to ensure compliance with the contract?",
+   "label_short": "Audit Rights",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Audit Rights"
+   }
+  },
+  {
+   "topic": "cuad_uncapped_liability",
+   "label": "Is a party\u2019s liability uncapped upon the breach of its obligation in the contract? This also includes uncap liability for a particular type of breach such as IP infringement or breach of confidentiality obligation.",
+   "label_short": "Uncapped Liability",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Uncapped Liability"
+   }
+  },
+  {
+   "topic": "cuad_cap_on_liability",
+   "label": "Does the contract include a cap on liability upon the breach of a party\u2019s obligation? This includes time limitation for the counterparty to bring claims or maximum amount for recovery.",
+   "label_short": "Cap on Liability",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Cap on Liability"
+   }
+  },
+  {
+   "topic": "cuad_liquidated_damages",
+   "label": "Does the contract contain a clause that would award either party liquidated damages for breach or a fee upon the termination of a contract (termination fee)?",
+   "label_short": "Liquidated Damages",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Liquidated Damages"
+   }
+  },
+  {
+   "topic": "cuad_warranty_duration",
+   "label": "What is the duration of any\u00a0 warranty against defects or errors in technology, products, or services\u00a0 provided under the contract?",
+   "label_short": "Warranty Duration",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Warranty Duration"
+   }
+  },
+  {
+   "topic": "cuad_insurance",
+   "label": "Is there a requirement for insurance that must be maintained by one party for the benefit of the counterparty?",
+   "label_short": "Insurance",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Insurance"
+   }
+  },
+  {
+   "topic": "cuad_covenant_not_to_sue",
+   "label": "Is a party restricted from contesting the validity of the counterparty\u2019s ownership of intellectual property or otherwise bringing a claim against the counterparty for matters unrelated to the contract?",
+   "label_short": "Covenant Not to Sue",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Covenant Not to Sue"
+   }
+  },
+  {
+   "topic": "cuad_third_party_beneficiary",
+   "label": "Is there a non-contracting party who is a beneficiary to some or all of the clauses in the contract and therefore can enforce its rights against a contracting party?",
+   "label_short": "Third Party Beneficiary",
+   "doctypes": [
+    "agreements"
+   ],
+   "provenance": "cuad",
+   "evidence": {
+    "source": "CUAD category_descriptions.csv (Atticus Project)",
+    "cuad_category": "Third Party Beneficiary"
+   }
+  },
+  {
+   "topic": "bill_total_and_amount_due",
+   "label": "the total amount due on this bill and the date payment is due",
+   "label_short": "total due",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_snapshot_and_changes",
+   "label": "snapshot of your bill and what changed since your last bill",
+   "label_short": "bill snapshot",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_charges_by_line",
+   "label": "charges by line details: the charges broken down for each subscriber line, phone number or device",
+   "label_short": "charges by line",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_plan_charges",
+   "label": "the monthly plan or package charge and what the plan includes",
+   "label_short": "plan charges",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_device_charges",
+   "label": "device instalment payments, equipment charges and upgrade fees",
+   "label_short": "device charges",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_usage_detail",
+   "label": "itemised usage detail: talk activity, call detail records, individual calls, messages and data sessions",
+   "label_short": "usage detail",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_surcharges",
+   "label": "explanation of surcharges and carrier recovery fees added to the bill",
+   "label_short": "surcharges",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_taxes_and_gov_fees",
+   "label": "taxes, surcharges and other governmental charges on wireless service",
+   "label_short": "taxes and gov fees",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_one_time_charges_and_credits",
+   "label": "one-time charges, credits and adjustments applied this period",
+   "label_short": "one-time charges",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_late_fee_and_past_due",
+   "label": "late payment fees, past due balances and collection terms",
+   "label_short": "late fee",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_payment_methods",
+   "label": "ways to pay your bill and the payment methods accepted",
+   "label_short": "ways to pay",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_autopay_and_enrolment",
+   "label": "automatic payment enrolment, paperless billing and discounts for them",
+   "label_short": "autopay",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_remittance_stub",
+   "label": "the tear-off payment coupon with the remit-to address and account number",
+   "label_short": "remittance stub",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_billing_dispute_process",
+   "label": "how to dispute a charge and where to send written disputes",
+   "label_short": "billing disputes",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_customer_service_contacts",
+   "label": "phone numbers, addresses and channels for contacting the provider",
+   "label_short": "contact us",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_account_and_address_changes",
+   "label": "changing the account holder, service address or mailing address",
+   "label_short": "address change",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_privacy_and_cpni",
+   "label": "customer proprietary network information, CPNI and privacy choices",
+   "label_short": "privacy and CPNI",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_service_features",
+   "label": "the features, perks and add-on services included with the service",
+   "label_short": "services and perks",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_rate_changes",
+   "label": "a plan rate adjustment or surcharge change notice",
+   "label_short": "rate change notice",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_legal_notices",
+   "label": "legal notices on the bill including bankruptcy information and regulatory disclosures",
+   "label_short": "legal notices",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  },
+  {
+   "topic": "bill_international_and_roaming",
+   "label": "international calling, roaming and out-of-network usage charges",
+   "label_short": "international and roaming",
+   "doctypes": [
+    "statements"
+   ],
+   "provenance": "curated-bills",
+   "evidence": {
+    "source": "hand-written from the section titles printed by the 7 telecom bills in this corpus (Snapshot of your bill, Charges by line details, Talk activity, Explanation of Surcharges, Ways to pay, Late fee policy, CPNI, Bankruptcy Information and others)"
+   }
+  }
+ ]
+}

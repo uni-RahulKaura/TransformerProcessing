@@ -34,10 +34,20 @@ _DATE = re.compile(r"\b(?:\d{1,2}[/-]\d{1,2}[/-]\d{2,4}"
                    r"|\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{4})\b")
 _TERMWORD = re.compile(r"\b(?:expir\w+|terminat\w+|renew\w+|effective\s+date"
                        r"|\d+\s*(?:day|week|month|year)s?)\b", re.I)
+# Role nouns. The original five were tuned on supplier agreements, so an NDA's parties -- who
+# are the Recipient and the Disclosing Party throughout -- and a lease's Landlord and Subtenant
+# went untagged in the documents that are ABOUT them.
 _ROLE = re.compile(r"\b(?:Supplier|Customer|Manufacturer|Buyer|Seller|Licensor|Licensee"
-                   r"|Vendor|Contractor|Client|Purchaser|Consultant|Provider)\b")
+                   r"|Vendor|Contractor|Client|Purchaser|Consultant|Provider"
+                   r"|Recipient|Disclosing\s+Party|Receiving\s+Party|Discloser"
+                   r"|Landlord|Tenant|Sublandlord|Subtenant|Sublessor|Sublessee)\b")
+# The corporate suffix is matched case-insensitively, the NAME is not. A signed agreement writes
+# its parties in capitals -- "NDA STUDIOS DISTRIBUTION LIMITED", "ACTIONIQ, INC." -- and against
+# a case-sensitive "Inc|Ltd|Limited" the party recitals of an NDA carried no PARTY label at all.
+# Scoped to the suffix group so the name still has to be capitalised; making the whole pattern
+# case-insensitive would match any six words followed by the word "company".
 _CORP = re.compile(r"\b[A-Z][A-Za-z0-9&.\-]*(?:\s+[A-Z][A-Za-z0-9&.\-]*){0,5}"
-                   r"\s*,?\s*(?:Inc|Corp|Corporation|Ltd|Limited|LLC|LC|GmbH|AG|plc)\.?\b")
+                   r"\s*,?\s*(?i:Inc|Corp|Corporation|Ltd|Limited|LLC|LC|GmbH|AG|plc)\.?\b")
 _PAY = re.compile(r"(?:US\$|\$|USD|EUR|CHF)\s?[\d,]+|\bnet\s+\d+\b"
                   r"|\b(?:payment|invoice|invoicing|price|pricing|fee|fees|rate|rates"
                   r"|currency|exchange\s+rate)\b", re.I)
