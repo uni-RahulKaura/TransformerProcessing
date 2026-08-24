@@ -1,6 +1,8 @@
 index.json
 *.json
 !requirements.json
+# the topic taxonomy IS source, not output: 53 derived + 41 CUAD clause categories + 22 for bills
+!topics.json
 __pycache__/
 *.pyc
 .venv/
