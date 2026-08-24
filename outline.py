@@ -48,7 +48,13 @@ def outline(md):
             title = "no header"
             stats["no_header"] += 1
         elif NUM_ONLY.match(title):
-            title = "%s (no header)" % title.rstrip(".")
+            # Just the number, once. It used to read "1 (no header)", which put a marker on
+            # every clause of an untitled agreement and made the outline harder to scan than
+            # the document. The count is still reported in the header line above.
+            # The number alone left the line looking blank next to titled sections, so the
+            # absence is stated. A section that DOES have a name from its bold text never
+            # reaches here.
+            title = "%s.   (no header)" % title.rstrip(".")
             stats["no_header"] += 1
         mark = []
         if s["tables"]:
